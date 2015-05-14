@@ -1,0 +1,121 @@
+{# src/DV/MainBundle/Resources/Main/servicios.html.twig #}
+
+{% extends "DVMainBundle::main_general.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+{% block DV_Main_body %}
+
+	<!-- BEGIN CONTENT -->
+	<div id="page_toLoad" class="row" style="width: 100%; background-image: url('{{ asset( 'img/bg_paginas/servicios.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+
+		<div id="sessionFlash" class="sessionFlash">
+		</div>
+
+		<div id="page_content">
+
+			<div class="row txt_sobre_img">
+				<h3>
+					SERVICIOS
+				</h3>
+
+				<hr class="medium_hr row60"/>
+				<br/>
+
+				<div class="row">
+					<div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
+						<div class="panel panel-default">
+						  	<div class="panel-heading">
+								<h4  class="panel-title">
+									Actividades comerciales que Brindamos
+								</h4>
+							</div>
+						  	<div class="panel-body">
+						    	<ul>
+									<li>
+										Supervisión y ejecución de obras civiles, viales y eléctricas
+									</li>
+									<li>
+										Mantenimiento Civil y Mecánico en Hoteles, Hospitales, Fabricas e industrias
+									</li>
+									<li>
+										Construcción de estructuras metálicas, máquinas y herramientas
+									</li>
+									<li>
+										Voladura de rocas en canteras, canales de irrigación, carreteras y minas
+									</li>
+									<li>
+										Demoliciones de construcciones existentes
+									</li>
+									<li>
+										Movimiento de tierras a nivel integral
+									</li>
+									<li>
+										Venta,  alquiler de maquinaria y equipos
+									</li>
+								</ul>
+						  	</div>
+						</div>
+					</div>
+
+					<div class="col-lg-2 col-md-2 col-sm-3 hidden-xs">
+						<div class="photo_thumbnail" style="width: 100%; background-image: url('{{ asset( 'img/servicios/001.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+						</div>
+						<div class="photo_thumbnail" style="width: 100%; background-image: url('{{ asset( 'img/servicios/002.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+						</div>
+						<script type="text/javascript">
+							var cw = $('.photo_thumbnail').width();
+							$('.photo_thumbnail').css({'height':cw+'px'});
+						</script>
+					</div>
+					
+				</div>
+
+				<div class="hidden-xs">
+					<br/>
+					<hr class="medium_hr row80"/>
+					<br/>
+				</div>
+
+				<div class="row">
+
+					<div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
+						<div class="panel panel-default">
+						  	<div class="panel-body">
+						    	<p>
+									Es nuestro propósito, ser la primera opción y elección para el desarrollo de los requerimientos de nuestros clientes y así contribuir en su éxito institucional. 
+								</p>
+								<p>
+									Para lo cual contamos con personal altamente calificado, con amplia experiencia en el rubro y maquinaria eficiente, lo que garantiza plenamente la <strong>calidad, seguridad y cumplimiento dentro de los plazos y presupuestos previstos</strong>.
+								</p>
+
+								<p>
+									Los objetivos se cumplen... cuando estamos juntos en el esfuerzo!
+								</p>
+						  	</div>
+						</div>
+					</div>
+
+					<div class="col-lg-2 col-md-2 col-sm-3 hidden-xs">
+						<div class="photo_thumbnail" style="width: 100%; background-image: url('{{ asset( 'img/servicios/001.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+						</div>
+						<div class="photo_thumbnail" style="width: 100%; background-image: url('{{ asset( 'img/servicios/002.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+						</div>
+						<script type="text/javascript">
+							var cw = $('.photo_thumbnail').width();
+							$('.photo_thumbnail').css({'height':cw+'px'});
+						</script>
+					</div>
+				</div>
+				
+
+				<br/><br/>
+			</div>	
+		</div>
+
+	</div>
+	<!-- END CONTENT -->
+
+{% endblock DV_Main_body %}

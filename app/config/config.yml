@@ -33,19 +33,6 @@ twig:
         resources:
             - 'MARedactorBundle:Redactor:fields.html.twig'
 
-# Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        ['MAMainBundle', 'MAUserBundle']
-    #java: /usr/bin/java
-    filters:
-        cssrewrite: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
-
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -79,70 +66,6 @@ swiftmailer:
 fos_user:
     db_driver:     orm                        # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
     firewall_name: main                       # Le nom du firewall derrière lequel on utilisera ces utilisateurs
-    user_class:    MA\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
+    user_class:    DV\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
     service:
         mailer: fos_user.mailer.twig_swift
-
-# Redactor bundle
-ma_redactor:
-    admin_article:
-        upload_file:
-            dir: /../web/uploads/files
-            web_dir : /uploads/files/
-            maxSize: 20M
-            mimeTypes:
-                - image/png
-                - image/jpeg
-                - image/jpg
-                - application/pdf
-                - application/msword
-                - text/csv
-                - text/plain
-            folders: false
-        upload_image:
-            dir: /../web/uploads/images
-            web_dir : /uploads/images/
-            maxSize: 5M
-            # minWidth:               100
-            # maxWidth:               1000
-            # minHeight:              100
-            # maxHeight:              1000
-            folders: false
-        settings:
-            lang:                   fr
-            minHeight:              200
-            plugins:                ['fullscreen']
-            tabindex : 0
-            buttons:                ['html', 'formatting', 'bold', 'italic', 'underline', 'deleted', 'link', 'alignment', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'image', 'video', 'file', 'table', 'horizontalrule']
-            formattingTags:         ['p', 'blockquote', 'pre']
-            imageEditable:          true
-            imageResizable:         true
-            imageLink:              true
-            imagePosition:          true
-            imageFloatMargin:       '20px'
-            imageUpload :           '/redactor/imageUpload/default'
-            fileUpload:             '/redactor/fileUpload/default'
-            clipboardUpload:        true
-            clipboardUploadUrl:     '/redactor/clipboardUpload/default'
-        role: [ROLE_ADMIN, IS_AUTHENTICATED_REMEMBERED]
-
-    admin_person:
-        settings:
-            lang:                   fr
-            minHeight:              200
-            plugins:                ['fullscreen']
-            tabindex : 0
-            buttons:                ['html', 'formatting', 'bold', 'italic', 'underline', 'deleted', 'link', 'alignment', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'horizontalrule']
-            formattingTags:         ['p', 'blockquote', 'pre']
-        role: [ROLE_ADMIN, IS_AUTHENTICATED_REMEMBERED]
-
-    admin_project:
-        settings:
-            lang:                   fr
-            minHeight:              200
-            plugins:                ['fullscreen']
-            tabindex : 0
-            buttons:                ['html', 'formatting', 'bold', 'italic', 'underline', 'deleted', 'link', 'alignment', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'horizontalrule']
-            formattingTags:         ['p', 'blockquote', 'pre']
-        role: [ROLE_ADMIN, IS_AUTHENTICATED_REMEMBERED]
-

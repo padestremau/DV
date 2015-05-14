@@ -1,0 +1,4 @@
+services:
+#    dv_main.example:
+#        class: DV\MainBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

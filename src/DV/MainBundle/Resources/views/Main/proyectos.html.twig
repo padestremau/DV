@@ -1,0 +1,123 @@
+{# src/DV/MainBundle/Resources/Main/proyectos.html.twig #}
+
+{% extends "DVMainBundle::main_general.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+{% block DV_Main_body %}
+
+	<!-- BEGIN CONTENT -->
+	<div id="page_toLoad" class="row" style="width: 100%; background-image: url('{{ asset( 'img/bg_paginas/proyectos.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+
+		<div id="sessionFlash" class="sessionFlash">
+		</div>
+
+		<div id="page_content">
+
+			<div class="row txt_sobre_img">
+				<h3>
+					PROYECTOS
+				</h3>
+
+				<hr class="medium_hr row60"/>
+				<br/>
+
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default">
+						  	<div class="panel-heading">
+								<h4  class="panel-title">
+									Proyectos acabados
+								</h4>
+							</div>
+						  	<div class="panel-body">
+								<p>
+									<ul>
+										<li>
+											Reparación de techos, repintado de paredes,
+										</li>
+										<li>
+											Instalaciones sanitarias, eléctricas
+										</li>
+										<li>
+											Mantenimiento Civil y mecánico
+										</li>
+										<li>
+											Desmontaje de tijerales correas y cobertura
+										</li>
+									</ul>
+								</p>
+						  	</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="photo_thumbnail" style="width: 100%; background-image: url('{{ asset( 'img/proyectos/001.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+						</div>
+						<script type="text/javascript">
+							var cw = $('.photo_thumbnail').width() / 2;
+							$('.photo_thumbnail').css({'height':cw+'px'});
+						</script>
+					</div>
+				</div>
+
+				<div class="hidden-xs">
+					<br/>
+					<hr class="medium_hr row80"/>
+					<br/>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default">
+						  	<div class="panel-heading">
+								<h4  class="panel-title">
+									Pinturas especiales en tanques / Reservorios
+								</h4>
+							</div>
+						  	<div class="panel-body">
+								<p>
+									<ul>
+										<li>
+											Construcción de muros perimetrales y división para el centro comercial REAL PLAZA con bloques de concreto.
+										</li>
+										<li>
+											Encofrado de vigas y columnas de confinamiento, encofrado de sobre cimientos.
+										</li>
+										<li>
+											Construcción de escaleras. Encofrado de escaleras, habilitación de acero y vaciado.
+										</li>
+										<li>
+											Demolición de construcciones existentes.
+										</li>
+										<li>
+											Demolición con cemento expansivo en estructura de concreto armado, concreto ciclópeo.
+										</li>
+									</ul>
+								</p>
+						  	</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="photo_thumbnail" style="width: 100%; background-image: url('{{ asset( 'img/proyectos/002.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+						</div>
+						<script type="text/javascript">
+							var cw = $('.photo_thumbnail').width() / 2;
+							$('.photo_thumbnail').css({'height':cw+'px'});
+						</script>
+					</div>
+				</div>
+
+				<br/><br/>
+			</div>
+
+
+		</div>
+
+	</div>
+	<!-- END CONTENT -->
+
+{% endblock DV_Main_body %}

@@ -1,0 +1,35 @@
+dv_main_homepage:
+    path:     /
+    defaults: { _controller: DVMainBundle:Main:index }
+
+dv_main_nosotros:
+    path:     /nosotros
+    defaults: { _controller: DVMainBundle:Main:nosotros }
+
+dv_main_servicios:
+    path:     /servicios
+    defaults: { _controller: DVMainBundle:Main:servicios }
+
+dv_main_proyectos:
+    path:     /proyectos
+    defaults: { _controller: DVMainBundle:Main:proyectos }
+
+dv_main_clientes:
+    path:     /clientes
+    defaults: { _controller: DVMainBundle:Main:clientes }
+
+dv_main_rse:
+    path:     /rse
+    defaults: { _controller: DVMainBundle:Main:rse }
+
+dv_main_fotos:
+    path:     /fotos
+    defaults: { _controller: DVMainBundle:Main:fotos }
+
+dv_main_contact:
+    path:     /contact
+    defaults: { _controller: DVMainBundle:Main:contact }
+
+dv_main_contact_enviar:
+    path:     /contact/enviar
+    defaults: { _controller: DVMainBundle:Main:enviar }

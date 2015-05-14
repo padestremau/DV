@@ -1,14 +1,14 @@
-ma_main:
-    resource: "@MAMainBundle/Resources/config/routing.yml"
+dv_user:
+    resource: "@DVUserBundle/Resources/config/routing.yml"
     prefix:   /
     # prefix:   /{_locale}
     # requirements:
     #     _locale: es|en|fr|   # needs to be null in case no /language is provided
 
-ma_user:
-    resource: "@MAUserBundle/Resources/config/routing.yml"
-    prefix:   /admin
-    # prefix:   /{_locale}/admin
+dv_main:
+    resource: "@DVMainBundle/Resources/config/routing.yml"
+    prefix:   /
+    # prefix:   /{_locale}
     # requirements:
     #     _locale: es|en|fr|   # needs to be null in case no /language is provided
 
@@ -47,7 +47,7 @@ fos_user_change_password:
 
 
 # Redactor 
-ma_redactor:
-    resource: "@MARedactorBundle/Controller/"
-    type:     annotation
-    prefix:   /redactor/
+# ma_redactor:
+#     resource: "@MARedactorBundle/Controller/"
+#     type:     annotation
+#     prefix:   /redactor/

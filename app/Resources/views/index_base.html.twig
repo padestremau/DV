@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>
       {% block title %}
-        Mission Andina
+        Deo Volente
       {% endblock %}
     </title>
 
@@ -18,7 +18,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="Site de Mission Andina" name="description"/>
+    <meta content="Sitio de Deo Volente" name="description"/>
     <meta content="Pierre-Arnaud Destremau" name="author"/>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -36,106 +36,38 @@
     {% stylesheets
       'css/font.css'
       'css/main_style.css'
-
-      filter='cssrewrite' %}
+      %} <!-- filter='cssrewrite'  -->
       <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
     {% endstylesheets %}
-
-    {% if (route == 'ma_user_article_edit') 
-        or (route == 'ma_user_article_new')
-        or (route == 'ma_user_project_new')
-        or (route == 'ma_user_project_edit')
-        or (route == 'ma_user_person_edit')
-        or (route == 'ma_user_person_new') %}
-      {% stylesheets
-      'redactor/redactor.css'
-      'bundles/stpredactor/css/sonata.css'
-      filter='cssrewrite' %}
-      <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
-      {% endstylesheets %}
-      {% javascripts 
-      'redactor/redactor.js'
-      'redactor/fullscreen.js'
-      'redactor/fr.js'
-      'jscolor/jscolor.js'
-      'bundles/stpredactor/js/script.js'
-      %}
-      <!-- 'jquery.autoSave.js'
-      'jquery.validate.min.js' -->
-      <script type="text/javascript" src="{{ asset_url }}"> </script>
-      {% endjavascripts %}
-    {% endif %}
-
-    <!-- FLIP -->
-    {% javascripts 
-      'js/jquery.flip.js'
-      %}
-      <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <!-- END FLIP -->
-
 
 </head>
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-  <body 
-    {% if (route != 'ma_main_helpUs') %}
-      class="main_background"
-    {% endif %} 
-    {% if (route == 'ma_main_homepage') 
-        or (route == 'ma_main_homepage_elementAjax')
-        or (route == 'ma_main_helpUs') %}
-      onLoad="onLoadData()"
-    {% endif %} 
-    >
+  <body>
 
         {% set route = app.request.attributes.get( '_route' ) %}
 
         <!-- BEGIN header -->
           {% include 'includes/header.html.twig' %}
         <!-- END header -->
-        
-        <!-- BEGIN social -->
-          {% include 'includes/social.html.twig' %}
-        <!-- END social -->
-
-        <!-- BEGIN in_construction -->
-          {% include 'includes/in_construction.html.twig' %}
-        <!-- END in_construction -->
-
-        <!-- BEGIN button -->
-          {% include 'includes/button_on_side.html.twig' %}
-        <!-- END button -->
-
-        <!-- BEGIN button -->
-          {% include 'includes/button_to_top.html.twig' %}
-        <!-- END button -->
-
-        <!-- BEGIN social -->
-          {% include 'includes/modals.html.twig' %}
-        <!-- END social -->
 
         <!-- BEGIN CONTAINER -->
-        <div id="page_container_gen" class="
-          {% if (route == 'ma_main_homepage') 
-            or (route == 'ma_main_homepage_elementAjax')
-            or (route == 'ma_main_helpUs') %}
-            page-container
-          {% else %}
-            page-admin
-          {% endif %} 
-            row margin0">
+        <div id="page_container_gen" class="row margin0">
             {% block body %}
             {% endblock body %} 
         </div>
         <!-- END CONTAINER -->
 
+        <!-- BEGIN FOOTER -->
+          {% include 'includes/footer.html.twig' %}
+        <!-- END FOOTER -->
+
 
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         {% javascripts 
-          'js/javascripts_misAnd.js'
-          'js/ajax_load.js'
+          'js/jssor.js'
+          'js/jssor.slider.js'
           %}
           <script type="text/javascript" src="{{ asset_url }}"> </script>
 
