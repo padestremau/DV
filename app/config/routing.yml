@@ -1,16 +1,10 @@
-dv_user:
-    resource: "@DVUserBundle/Resources/config/routing.yml"
-    prefix:   /
-    # prefix:   /{_locale}
-    # requirements:
-    #     _locale: es|en|fr|   # needs to be null in case no /language is provided
-
 dv_main:
     resource: "@DVMainBundle/Resources/config/routing.yml"
     prefix:   /
-    # prefix:   /{_locale}
-    # requirements:
-    #     _locale: es|en|fr|   # needs to be null in case no /language is provided
+
+dv_user:
+    resource: "@DVUserBundle/Resources/config/routing.yml"
+    prefix:   /admin
 
 # USERs
 
@@ -20,34 +14,22 @@ fos_user_security:
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix:     /profile
-    # prefix:     /{_locale}/profile
-    # requirements:
-    #     _locale: es|en|fr
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix:     /register
-    # prefix:     /{_locale}/register
-    # requirements:
-    #     _locale: es|en|fr
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix:     /resetting
-    # prefix:     /{_locale}/resetting
-    # requirements:
-    #     _locale: es|en|fr
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix:     /changePassword
-    # prefix:     /{_locale}/changePassword
-    # requirements:
-    #     _locale: es|en|fr
 
 
 # Redactor 
-# ma_redactor:
-#     resource: "@MARedactorBundle/Controller/"
-#     type:     annotation
-#     prefix:   /redactor/
+dv_redactor:
+    resource: "@DVRedactorBundle/Controller/"
+    type:     annotation
+    prefix:   /redactor/

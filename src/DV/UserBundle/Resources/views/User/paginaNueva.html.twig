@@ -1,0 +1,115 @@
+{# src/DV/UserBundle/Resources/User/indexUser.html.twig #}
+
+{% extends "DVUserBundle::user_general.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Admin - Nuevo
+{% endblock %}
+
+{% block DV_User_body %}
+
+	<!-- BEGIN CONTENT -->
+	<div id="page_toLoad" class="row">
+
+		<div id="sessionFlash" class="sessionFlash">
+		</div>
+
+		<div id="page_content">
+
+			<!--  ///// ///// ///// ///// /////  AUTHORISED  ///// ///// ///// ///// ///// --> 
+        	{% if is_granted("ROLE_ADMIN") %}
+
+			  	<div id="section_admin" class="row left">
+			  		<div class="row80">
+			  			<a class="btn btn-action-admin" href="{{ path('dv_user_homepage') }}">
+			  				<img src="{{ asset('img/system/defaults/left_arrow.png') }}" alt="" class="btn_arrow"/>
+	    					Atrás
+	    				</a>
+			  		</div>
+			  		<br/>
+					<div class="row">
+		    			<form method="post" {{ form_enctype(formNewPagina) }}>
+			        		{% if form_errors(formNewPagina) %}
+			                    <div class="error_message">
+			                      <span class="warning_word">
+			                        {{ 'user.warning.warning'|trans }}
+			                      </span>
+			                      <span class="warning_message">
+			                        {{ form_errors(formNewPagina) }}
+			                      </span>
+			                    </div>
+			                    <br/>
+			                  {% endif %}
+							<div class="row80">
+								<div class="form-group">
+							        {{ form_label(formNewPagina.nombre, 'Titre', 
+							        	{'label_attr': {'class': 'control-label'}}) }}
+							        {% if form_errors(formNewPagina.nombre) %}
+					                    <div class="error_message">
+					                      	<span class="warning_word">
+					                        	{{ 'user.warning.warning'|trans }}
+					                      	</span>
+					                      	<span class="warning_message">
+					                        	{{ form_errors(formNewPagina.nombre) }}
+					                      	</span>
+					                    </div>
+					                    <br/>
+					                {% endif %}
+									<div class="input-icon">
+							        	<i class="fa fa-user"></i>
+							        	{% set opt_title = {'attr': {'class': 'form-control placeholder-no-fix',
+							        		'type':'text', 'placeholder':"L'arrivée majestueuse d'un article à propos d'un sujet en particulier", 'id':'_title', 
+							        		'name':'_title'}} %}
+							        	{{ form_widget(formNewPagina.nombre, opt_title) }}
+							        </div>
+								</div>
+								<div class="form-group">
+							        {{ form_label(formNewPagina.contenido, 'Contenu', 
+							        	{'label_attr': {'class': 'control-label'}}) }}
+							        {% if form_errors(formNewPagina.contenido) %}
+					                    <div class="error_message">
+					                      	<span class="warning_word">
+					                        	{{ 'user.warning.warning'|trans }}
+					                      	</span>
+					                      	<span class="warning_message">
+					                        	{{ form_errors(formNewPagina.contenido) }}
+					                      	</span>
+					                    </div>
+					                    <br/>
+					                {% endif %}
+									<div class="input-icon">
+							        	<i class="fa fa-user"></i>
+							        	{% set opt_content = {'attr': { 'class': 'redactor',
+							        		'placeholder':"L'arrivée majestueuse d'un contenu d'article, à propos d'un sujet en particulier", 'id':'_content', 
+							        		'name':'_content'}} %}
+							        	{{ form_widget(formNewPagina.contenido, opt_content) }}
+							        </div>
+
+								</div>
+
+								<div>
+									<br/><br/>
+								</div>
+
+								<!-- Et pour le reste du formulaire ... ;) -->
+								{{ form_widget(formNewPagina) }}
+								<div class="center">
+									<input type="submit" class="btn btn-log" value="Enregistrer"/>
+								</div>
+							</div>
+						</form>
+	    			</div>
+			  	</div>
+			  	
+        	{% else %}
+        		<div>
+        			<br/><br/><br/><br/><br/>
+        			Usted no esta autorizado a acceder a esta parte del sitio!
+        		</div>
+        	{% endif %}
+
+		</div>
+	</div>
+	<!-- END CONTENT -->
+
+{% endblock DV_User_body %}

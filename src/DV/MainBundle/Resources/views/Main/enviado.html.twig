@@ -1,0 +1,53 @@
+{# src/DV/MainBundle/Resources/Main/contact.html.twig #}
+
+{% extends "DVMainBundle::main_general.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+{% block DV_Main_body %}
+
+	<!-- BEGIN CONTENT -->
+	<div id="page_toLoad" class="row" style="width: 100%; background-image: url('{{ asset( 'img/bg_paginas/servicios.jpg') }}'); background-size: cover; background-position: 50%; " alt="alt">
+
+		<div id="sessionFlash" class="sessionFlash">
+		</div>
+
+		<div id="page_content">
+
+			<div class="row txt_sobre_img">
+				<h3>
+					MUCHAS GRACIAS
+				</h3>
+
+				<hr class="medium_hr row60"/>
+				<br/>
+
+				<div class="row">
+
+					<p class="center">
+						Su mensaje fue enviado. Le respondaremos pronto. 
+
+						<br/><br/>
+
+						Gracias.
+
+						<br/><br/>
+
+						<strong>
+							Deo Volente
+						</strong>
+					</p>
+					
+				</div>
+				
+
+				<br/><br/>
+			</div>	
+		</div>
+
+	</div>
+	<!-- END CONTENT -->
+
+{% endblock DV_Main_body %}

@@ -8,7 +8,7 @@
 		<div class="col-lg-3 col-md-3 col-sm-10 col-xs-10">
 			<div id="div_logo_header">
 				<a href="{{ path('dv_main_homepage') }}" class="no_style_a">
-					<img src="{{ asset('img/system/logo/logo.jpg') }}" alt="Logo" id="logo_header">
+					<img src="{{ asset('img/system/logo/logo.png') }}" alt="Logo" id="logo_header">
 				</a>
 			</div>
 		</div>
@@ -40,11 +40,11 @@
 						CLIENTES
 					</a>
 				</li><!---->
-				<li class="right_border_li {% if route == 'dv_main_rse' %}header_active{% endif %}">
+				<!-- <li class="right_border_li {% if route == 'dv_main_rse' %}header_active{% endif %}">
 					<a href="{{ path('dv_main_rse') }}" class="no_style_a">
 						RSE
 					</a>
-				</li><!---->
+				</li> --><!---->
 				<li class="right_border_li {% if route == 'dv_main_fotos' %}header_active{% endif %}">
 					<a href="{{ path('dv_main_fotos') }}" class="no_style_a">
 						FOTOS
@@ -60,13 +60,13 @@
 		</div>
 
 		<div id="social_media" class="">
-		    <a href="https://www.facebook.com/" target="_blank">
+		    <a href="https://www.facebook.com/CorporacionDeoVolenteSrl" target="_blank">
 		      <div class="social social_fb"></div>
 		    </a>
-		    <a href="https://twitter.com/" target="_blank" rel="external">
+		    <!-- <a href="https://twitter.com/" target="_blank" rel="external">
 		      <div class="social social_tw"></div>
-		    </a>
-		    <a href="#">
+		    </a> -->
+		    <a href="{{ path('dv_main_contact') }}">
 		      <div class="social social_mail"></div>
 		    </a>
 		</div>

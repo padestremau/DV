@@ -49,7 +49,11 @@
         {% set route = app.request.attributes.get( '_route' ) %}
 
         <!-- BEGIN header -->
-          {% include 'includes/header.html.twig' %}
+          {% if route != 'dv_user_homepage' %}
+            {% include 'includes/header.html.twig' %}
+          {% else %}
+            {% include 'includes/nav_admin.html.twig' %}
+          {% endif %}
         <!-- END header -->
 
         <!-- BEGIN CONTAINER -->
@@ -60,7 +64,9 @@
         <!-- END CONTAINER -->
 
         <!-- BEGIN FOOTER -->
-          {% include 'includes/footer.html.twig' %}
+          {% if route != 'dv_user_homepage' %}
+            {% include 'includes/footer.html.twig' %}
+          {% endif %}
         <!-- END FOOTER -->
 
 

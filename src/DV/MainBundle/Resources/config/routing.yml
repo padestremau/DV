@@ -33,3 +33,7 @@ dv_main_contact:
 dv_main_contact_enviar:
     path:     /contact/enviar
     defaults: { _controller: DVMainBundle:Main:enviar }
+
+dv_main_contact_enviado:
+    path:     /contact/enviado
+    defaults: { _controller: DVMainBundle:Main:enviado }

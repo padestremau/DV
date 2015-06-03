@@ -1,3 +1,29 @@
 dv_user_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: DVUserBundle:Default:index }
+    path:     /
+    defaults: { _controller: DVUserBundle:User:index }
+
+dv_user_paginas:
+    path:     /paginas/{paginaId}
+    defaults: { _controller: DVUserBundle:User:index }
+    requirements:
+        paginaId: \d+
+
+dv_user_pagina_modif:
+    path:     /pagina/modificacion/{paginaId}
+    defaults: { _controller: DVUserBundle:User:paginaModif }
+    requirements:
+        paginaId: \d+
+
+dv_user_pagina_nueva:
+    path:     /pagina/nueva
+    defaults: { _controller: DVUserBundle:User:paginaNueva }
+
+dv_user_pagina_supr:
+    path:     /pagina/suprimir/{paginaId}
+    defaults: { _controller: DVUserBundle:User:paginaSupr }
+    requirements:
+        paginaId: \d+
+
+dv_user_fotos:
+    path:     /fotos
+    defaults: { _controller: DVUserBundle:User:fotos }

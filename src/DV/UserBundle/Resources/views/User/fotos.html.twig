@@ -1,0 +1,61 @@
+{# src/DV/UserBundle/Resources/User/indexUser.html.twig #}
+
+{% extends "DVUserBundle::user_general.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Admin - Fotos
+{% endblock %}
+
+{% block DV_User_body %}
+
+	<!-- BEGIN CONTENT -->
+	<div id="page_toLoad" class="row">
+
+		<div id="sessionFlash" class="sessionFlash">
+		</div>
+
+		<div id="page_content">
+
+			<!--  ///// ///// ///// ///// /////  AUTHORISED  ///// ///// ///// ///// ///// --> 
+        	{% if is_granted("ROLE_ADMIN") %}
+
+			  	<div id="section_admin" class="row center">
+					<div class="row">
+	    				{% if fotos|length > 0 %}
+							{% for foto in fotos %}
+								<div class="col-md-2 col-xs-2 photo_admin">
+									<div class="article_photo_container">
+										<div class="photo_default" style="width: 100%; min-height:100px; background-image: url('{{ asset( foto.webPath) }}'); background-size: cover; background-position: 50%;" alt="{{ foto.alt }}">
+					                    </div>
+									</div>
+									<strong>
+										{{ foto.nombre }}
+									</strong>
+									<a href="javascript:areYouSureDeletePhoto('{{ path('ma_user_photo_delete', {'type':type, 'photoId':foto.id}) }}')">
+	                              		<button class="btn btn-delete-admin">
+		                              		<span class="glyphicon black glyphicon-trash" aria-hidden="true"></span>
+	                              		</button>
+	                              	</a>
+								</div>
+							{% endfor %}
+						{% else %}
+							<p class="center">
+								<br/><br/><br/>
+								Ningun foto ahora.
+							</p>
+						{% endif %}
+	    			</div>
+			  	</div>
+			  	
+        	{% else %}
+        		<div>
+        			<br/><br/><br/><br/><br/>
+        			Usted no esta autorizado a acceder a esta parte del sitio!
+        		</div>
+        	{% endif %}
+
+		</div>
+	</div>
+	<!-- END CONTENT -->
+
+{% endblock DV_User_body %}

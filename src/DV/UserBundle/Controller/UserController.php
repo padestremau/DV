@@ -4,566 +4,176 @@ namespace DV\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-// use DV\MainBundle\Entity\Article;
-// use DV\MainBundle\Form\ArticleType;
+use DV\MainBundle\Entity\Pagina;
+use DV\MainBundle\Form\PaginaType;
+
+use DV\UserBundle\Entity\Foto;
+use DV\UserBundle\Form\FotoType;
 
 class UserController extends Controller
 {
-    public function indexAction()
+    public function indexAction($paginaId = null)
     {
-        return $this->render('DVUserBundle:User:indexUser.html.twig');
-    }
+        if ($paginaId != null) {
+            $paginaPedida = $this ->getDoctrine()
+                            ->getManager()
+                            ->getRepository('DVMainBundle:Pagina')
+                            ->find($paginaId);
+        }
+        else {
+            $paginaPedida = $this ->getDoctrine()
+                            ->getManager()
+                            ->getRepository('DVMainBundle:Pagina')
+                            ->findLatestOne();
 
-    public function articlesAction($articleId = null)
-    {
-    	if ($articleId != null) {
-	    	$articleAsked = $this ->getDoctrine()
-	                        ->getManager()
-	                        ->getRepository('DVMainBundle:Article')
-	                        ->find($articleId);
-    	}
-    	else {
-    		$articleAsked = $this ->getDoctrine()
-	                        ->getManager()
-	                        ->getRepository('DVMainBundle:Article')
-	                        ->findLatestOne();
+            if (sizeof($paginaPedida) > 0) {
+                $paginaPedida = $paginaPedida[0];
+            }
+            else {
+                $paginaPedida = new Pagina;
+            }
+        }
 
-	        if (sizeof($articleAsked) > 0) {
-		        $articleAsked = $articleAsked[0];
-	        }
-	        else {
-	        	$articleAsked = new Article;
-	        }
-    	}
-
-        $articles = $this ->getDoctrine()
+        $paginas = $this ->getDoctrine()
                         ->getManager()
-                        ->getRepository('DVMainBundle:Article')
-                        ->findAllByDate();
+                        ->getRepository('DVMainBundle:Pagina')
+                        ->findAll();
 
-        return $this->render('DVUserBundle:User:articles.html.twig', array(
-        	'articleAsked' => $articleAsked, 
-        	'articles' => $articles
-        	));
+        return $this->render('DVUserBundle:User:indexUser.html.twig', array(
+            'paginaPedida' => $paginaPedida, 
+            'paginas' => $paginas
+            ));
     }
 
-    public function articleEditAction($articleId)
+    public function paginaModifAction($paginaId)
     {
-    	$article = $this ->getDoctrine()
+    	$pagina = $this ->getDoctrine()
 	                        ->getManager()
 	                        ->getRepository('DVMainBundle:Article')
-	                        ->find($articleId);
+	                        ->find($paginaId);
 
         // On utiliser le OrdersType
-        $formNewArticle = $this->createForm(new ArticleType(), $article);
+        $formNewPagina = $this->createForm(new PaginaType(), $pagina);
 
         // On récupère la requête
-        $formNewArticle->handleRequest($this->getRequest());
+        $formNewPagina->handleRequest($this->getRequest());
 
         // On vérifie que les valeurs entrées sont correctes
-        if ($formNewArticle->isValid()) {
+        if ($formNewPagina->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
+            $em->persist($pagina);
             $em->flush();
 
             // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_articles'));
+            return $this->redirect($this->generateUrl('ma_user_homepage'));
         }
 
-        return $this->render('DVUserBundle:User:articleNew.html.twig', array(
-            'formNewArticle' => $formNewArticle->createView()
+        return $this->render('DVMainBundle:Main:paginaNueva.html.twig', array(
+            'formNewPagina' => $formNewPagina->createView()
         ));
     }
 
-    public function articleNewAction()
+    public function paginaNuevaAction()
     {
-    	$article = new Article;
+    	$pagina = new Pagina;
 
         // On utiliser le OrdersType
-        $formNewArticle = $this->createForm(new ArticleType(), $article);
+        $formNewPagina = $this->createForm(new PaginaType(), $pagina);
 
         // On récupère la requête
-        $formNewArticle->handleRequest($this->getRequest());
+        $formNewPagina->handleRequest($this->getRequest());
 
         // On vérifie que les valeurs entrées sont correctes
-        if ($formNewArticle->isValid()) {
+        if ($formNewPagina->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
+            $em->persist($pagina);
             $em->flush();
 
             // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_articles'));
+            return $this->redirect($this->generateUrl('ma_user_index'));
         }
 
-        return $this->render('DVUserBundle:User:articleNew.html.twig', array(
-            'formNewArticle' => $formNewArticle->createView()
+        return $this->render('DVUserBundle:User:paginaNueva.html.twig', array(
+            'formNewPagina' => $formNewPagina->createView()
         ));
     }
 
-    public function articleDeleteAction($articleId)
+    public function paginaSuprAction($paginaId)
     {
-    	$article = $this ->getDoctrine()
+    	$pagina = $this ->getDoctrine()
 	                        ->getManager()
-	                        ->getRepository('DVMainBundle:Article')
-	                        ->find($articleId);
+	                        ->getRepository('DVMainBundle:Pagina')
+	                        ->find($paginaId);
 
-	    if (!$article) {
-	        throw $this->createNotFoundException("Aucun article à supprimer n'a été trouvé ...");
+	    if (!$pagina) {
+	        throw $this->createNotFoundException("Ningun pagina a suprimir fue encontrada ...");
 	    }
 
         $em = $this->getDoctrine()->getManager();
-        $em->remove($article);
+        $em->remove($pagina);
         $em->flush();
 
         // On redirige vers la page de visualisation de le document nouvellement créé
-        return $this->redirect($this->generateUrl('ma_user_articles'));
+        return $this->redirect($this->generateUrl('ma_user_index'));
     }
 
 
-    public function photosAction($type = null)
+    public function fotosAction($type = null)
     {
-        $photos = $this ->getDoctrine()
+        $fotos = $this ->getDoctrine()
                         ->getManager()
-                        ->getRepository('DVMainBundle:Photos')
-                        ->findAllByDate();
+                        ->getRepository('DVUserBundle:Foto')
+                        ->findAll();
 
-        $photosEcoliers = array();
-        $photosEtudiants = array();
-        $photosJeunesPro = array();
-        for ($i=0; $i < sizeof($photos); $i++) { 
-            $photo = $photos[$i];
-            if ($photo->getCategory() == 'ecoliers') {
-                $photosEcoliers[] = $photo;
-            } 
-            else if ($photo->getCategory() == 'etudiants') {
-                $photosEtudiants[] = $photo;
-            }
-            else if ($photo->getCategory() == 'etudiants') {
-                $photosJeunesPro[] = $photo;
-            }
-            
-        }
-
-        if ($type) {
-            if ($type == 'ecoliers') {
-                $photos = $photosEcoliers;
-            }
-            else if ($type == 'etudiants') {
-                $photos = $photosEtudiants;
-            }
-            else if ($type == 'jeunesPro') {
-                $photos = $photosJeunesPro;
-            }
-        }
-        else {
-            $type = 'ecoliers';
-            $photos = $photosEcoliers;
-        }
-
-        return $this->render('DVUserBundle:User:photos.html.twig', array(
-            'type' => $type,
-            'photos' => $photos
+        return $this->render('DVUserBundle:User:fotos.html.twig', array(
+            'fotos' => $fotos
         ));
     }
 
     public function photoNewAction($type)
     {
-        $photo = new Photos;
+        $foto = new Foto;
 
-        $photo->setCategory($type);
+        $foto->setCategory($type);
 
         // On utiliser le OrdersType
-        $formNewPhoto = $this->createForm(new PhotosType(), $photo);
+        $formNewFoto = $this->createForm(new FotoType(), $foto);
 
         // On récupère la requête
-        $formNewPhoto->handleRequest($this->getRequest());
+        $formNewFoto->handleRequest($this->getRequest());
 
         // On vérifie que les valeurs entrées sont correctes
-        if ($formNewPhoto->isValid()) {
+        if ($formNewFoto->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($photo);
+            $em->persist($foto);
             $em->flush();
 
             // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_photos_spe', array('type' => $type)));
+            return $this->redirect($this->generateUrl('ma_user_fotos'));
         }
 
-        return $this->render('DVUserBundle:User:photoNew.html.twig', array(
-            'formNewPhoto' => $formNewPhoto->createView(),
+        return $this->render('DVUserBundle:User:photoNuevo.html.twig', array(
+            'formNewFoto' => $formNewFoto->createView(),
             'type' => $type
         ));
     }
 
-    public function photoDeleteAction($photoId, $type)
+    public function photoDeleteAction($fotoId, $type)
     {
-        $photo = $this ->getDoctrine()
+        $foto = $this ->getDoctrine()
                             ->getManager()
-                            ->getRepository('DVMainBundle:Photos')
-                            ->find($photoId);
+                            ->getRepository('DVUserBundle:Foto')
+                            ->find($fotoId);
 
-        if (!$photo) {
-            throw $this->createNotFoundException("Aucune photo à supprimer n'a été trouvé ...");
+        if (!$foto) {
+            throw $this->createNotFoundException("Ningun foto a suprimir ...");
         }
 
         $em = $this->getDoctrine()->getManager();
-        $em->remove($photo);
+        $em->remove($foto);
         $em->flush();
 
         // On redirige vers la page de visualisation de le document nouvellement créé
-        return $this->redirect($this->generateUrl('ma_user_photos_spe', array('type' => $type)));
-    }
-
-    public function videosAction($type = null, $videoId = null)
-    {
-        $videos = $this ->getDoctrine()
-                        ->getManager()
-                        ->getRepository('DVMainBundle:Videos')
-                        ->findAllByDate();
-
-        $videosEcoliers = array();
-        $videosEtudiants = array();
-        $videosJeunesPro = array();
-        for ($i=0; $i < sizeof($videos); $i++) { 
-            $video = $videos[$i];
-
-            if ($video->getCategory() == 'ecoliers') {
-                $videosEcoliers[] = $video;
-            } 
-            else if ($video->getCategory() == 'etudiants') {
-                $videosEtudiants[] = $video;
-            }
-            else if ($video->getCategory() == 'jeunesPro') {
-                $videosJeunesPro[] = $video;
-            }
-            
-        }
-
-        if ($type) {
-            if ($type == 'ecoliers') {
-                $videos = $videosEcoliers;
-            }
-            else if ($type == 'etudiants') {
-                $videos = $videosEtudiants;
-            }
-            else if ($type == 'jeunesPro') {
-                $videos = $videosJeunesPro;
-            }
-        }
-        else {
-            $type = 'ecoliers';
-            $videos = $videosEcoliers;
-        }
-
-        if ($videoId != null) {
-            $videoSelect = $this ->getDoctrine()
-                                ->getManager()
-                                ->getRepository('DVMainBundle:Videos')
-                                ->find($videoId);
-        }
-        else {
-            if ($type == 'ecoliers') {
-                $videoSelect = $this ->getDoctrine()
-                                ->getManager()
-                                ->getRepository('DVMainBundle:Videos')
-                                ->findLatestOneByType('ecoliers');
-            }
-            else if ($type == 'etudiants') {
-                $videoSelect = $this ->getDoctrine()
-                                ->getManager()
-                                ->getRepository('DVMainBundle:Videos')
-                                ->findLatestOneByType('etudiants');
-            }
-            else if ($type == 'jeunesPro') {
-                $videoSelect = $this ->getDoctrine()
-                                ->getManager()
-                                ->getRepository('DVMainBundle:Videos')
-                                ->findLatestOneByType('jeunesPro');
-            }
-            else {
-                $videoSelect = $this ->getDoctrine()
-                                ->getManager()
-                                ->getRepository('DVMainBundle:Videos')
-                                ->findLatestOne();
-
-            }
-            if (sizeof($videoSelect) > 0) {
-                $videoSelect = $videoSelect[0];
-            }
-            else {
-                $videoSelect = new Videos;
-            }
-        }
-
-        return $this->render('DVUserBundle:User:videos.html.twig', array(
-            'type' => $type,
-            'videos' => $videos,
-            'videoSelect' => $videoSelect
-        ));
-    }
-
-    public function videoNewAction($type)
-    {
-        $video = new videos;
-
-        $video->setCategory($type);
-
-        // On utiliser le OrdersType
-        $formNewVideo = $this->createForm(new VideosType(), $video);
-
-        // On récupère la requête
-        $formNewVideo->handleRequest($this->getRequest());
-
-        // On vérifie que les valeurs entrées sont correctes
-        if ($formNewVideo->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($video);
-            $em->flush();
-
-            // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_videos_spe', array('type' => $type)));
-        }
-
-        return $this->render('DVUserBundle:User:videoNew.html.twig', array(
-            'formNewVideo' => $formNewVideo->createView(),
-            'type' => $type
-        ));
-    }
-
-    public function videoEditAction($type, $videoId)
-    {
-        $video = $this ->getDoctrine()
-                            ->getManager()
-                            ->getRepository('DVMainBundle:Videos')
-                            ->find($videoId);
-
-        // On utiliser le OrdersType
-        $formNewVideo = $this->createForm(new VideosType(), $video);
-
-        // On récupère la requête
-        $formNewVideo->handleRequest($this->getRequest());
-
-        // On vérifie que les valeurs entrées sont correctes
-        if ($formNewVideo->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($video);
-            $em->flush();
-
-            // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_videos_spe', array('type' => $type)));
-        }
-
-        return $this->render('DVUserBundle:User:videoNew.html.twig', array(
-            'formNewVideo' => $formNewVideo->createView(),
-            'type' => $type
-        ));
-    }
-
-    public function videoDeleteAction($videoId, $type)
-    {
-        $video = $this ->getDoctrine()
-                            ->getManager()
-                            ->getRepository('DVMainBundle:Videos')
-                            ->find($videoId);
-
-        if (!$video) {
-            throw $this->createNotFoundException("Aucune video à supprimer n'a été trouvé ...");
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($video);
-        $em->flush();
-
-        // On redirige vers la page de visualisation de le document nouvellement créé
-        return $this->redirect($this->generateUrl('ma_user_videos_spe', array('type' => $type)));
-    }
-
-    public function nosBesoinsAction($elementType = null, $elementId = null)
-    {
-        $persons = $this ->getDoctrine()
-                            ->getManager()
-                            ->getRepository('DVMainBundle:Person')
-                            ->findAll();
-
-        $projects = $this ->getDoctrine()
-                            ->getManager()
-                            ->getRepository('DVMainBundle:Project')
-                            ->findAll();
-
-        if ($elementType == 'beneficiaires' and $elementId != null) {
-                $elementAsked = $this ->getDoctrine()
-                                        ->getManager()
-                                        ->getRepository('DVMainBundle:Person')
-                                        ->find($elementId);
-        }
-        else if ($elementType == 'projets' and $elementId != null) {
-                $elementAsked = $this ->getDoctrine()
-                                ->getManager()
-                                ->getRepository('DVMainBundle:Project')
-                                ->find($elementId);
-        }
-        else {
-            $elementAsked = '';
-        }
-
-        return $this->render('DVUserBundle:User:nosBesoins.html.twig', array(
-            'elementAsked' => $elementAsked,
-            'elementType' => $elementType,
-            'persons' => $persons,
-            'projects' => $projects
-            ));
-    }
-
-    public function personNewAction()
-    {
-        $person = new Person;
-
-        // On utiliser le OrdersType
-        $formNewPerson = $this->createForm(new PersonType(), $person);
-
-        // On récupère la requête
-        $formNewPerson->handleRequest($this->getRequest());
-
-        // On vérifie que les valeurs entrées sont correctes
-        if ($formNewPerson->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
-            $em->flush();
-
-            // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_nosBesoins'));
-        }
-
-        return $this->render('DVUserBundle:User:personNew.html.twig', array(
-            'formNewPerson' => $formNewPerson->createView()
-        ));
-    }
-
-    public function personEditAction($personId)
-    {
-        $person = $this ->getDoctrine()
-                            ->getManager()
-                            ->getRepository('DVMainBundle:Person')
-                            ->find($personId);
-
-        // On utiliser le OrdersType
-        $formNewPerson = $this->createForm(new PersonType(), $person);
-
-        // On récupère la requête
-        $formNewPerson->handleRequest($this->getRequest());
-
-        // On vérifie que les valeurs entrées sont correctes
-        if ($formNewPerson->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
-            $em->flush();
-
-            // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_nosBesoins_elementAjax', array('elementType' => 'beneficiaires', 'elementId' => $personId)));
-        }
-
-        return $this->render('DVUserBundle:User:personNew.html.twig', array(
-            'formNewPerson' => $formNewPerson->createView()
-        ));
-    }
-
-    public function personDeleteAction($personId)
-    {
-        $person = $this ->getDoctrine()
-                            ->getManager()
-                            ->getRepository('DVMainBundle:Person')
-                            ->find($personId);
-
-        if (!$person) {
-            throw $this->createNotFoundException("Aucun bénéficiaire à supprimer n'a été trouvé ...");
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($person);
-        $em->flush();
-
-        // On redirige vers la page de visualisation de le document nouvellement créé
-        return $this->redirect($this->generateUrl('ma_user_nosBesoins'));
-    }
-
-    public function projectNewAction()
-    {
-        $project = new Project;
-
-        // On utiliser le OrdersType
-        $formNewProject = $this->createForm(new ProjectType(), $project);
-
-        // On récupère la requête
-        $formNewProject->handleRequest($this->getRequest());
-
-        // On vérifie que les valeurs entrées sont correctes
-        if ($formNewProject->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($project);
-            $em->flush();
-
-            // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_nosBesoins'));
-        }
-
-        return $this->render('DVUserBundle:User:projectNew.html.twig', array(
-            'formNewProject' => $formNewProject->createView()
-        ));
-    }
-
-    public function projectEditAction($projectId)
-    {
-        $project = $this ->getDoctrine()
-                            ->getManager()
-                            ->getRepository('DVMainBundle:Project')
-                            ->find($projectId);
-
-        // On utiliser le OrdersType
-        $formNewProject = $this->createForm(new projectEditType(), $project);
-
-        // On récupère la requête
-        $formNewProject->handleRequest($this->getRequest());
-
-        // On vérifie que les valeurs entrées sont correctes
-        if ($formNewProject->isValid()) {
-
-            if ($_POST['finished'] == 'no_finished') {
-                $project->setCompletedAt(null);
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($project);
-            $em->flush();
-
-            // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_nosBesoins_elementAjax', array('elementType' => 'projets', 'elementId' => $projectId)));
-        }
-
-        return $this->render('DVUserBundle:User:projectNew.html.twig', array(
-            'formNewProject' => $formNewProject->createView()
-        ));
-    }
-
-    public function projectDeleteAction($projectId)
-    {
-        $project = $this ->getDoctrine()
-                            ->getManager()
-                            ->getRepository('DVMainBundle:Project')
-                            ->find($projectId);
-
-        if (!$project) {
-            throw $this->createNotFoundException("Aucun projet à supprimer n'a été trouvé ...");
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($project);
-        $em->flush();
-
-        // On redirige vers la page de visualisation de le document nouvellement créé
-        return $this->redirect($this->generateUrl('ma_user_nosBesoins'));
-    }
-
-    public function contentAction()
-    {
-        return $this->render('DVUserBundle:User:content.html.twig');
+        return $this->redirect($this->generateUrl('ma_user_fotos'));
     }
 }

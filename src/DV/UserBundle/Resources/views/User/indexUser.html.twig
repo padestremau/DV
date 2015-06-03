@@ -1,55 +1,119 @@
-{# src/MA/UserBundle/Resources/User/indexUser.html.twig #}
+{# src/DV/UserBundle/Resources/User/indexUser.html.twig #}
 
-{% extends "MAUserBundle::user_general.html.twig" %}
+{% extends "DVUserBundle::user_general.html.twig" %}
 
 {% block title %}
   {{ parent() }} - Admin
 {% endblock %}
 
-{% block MA_User_body %}
+{% block DV_User_body %}
 
 	<!-- BEGIN CONTENT -->
-	<div id="page_content" class="row">
+	<div id="page_toLoad" class="row">
 
 		<div id="sessionFlash" class="sessionFlash">
 		</div>
 
-		<div id="fullpage">
-			<div class="section section_admin" id="section6">
+		<div id="page_content">
 
-				<!--  ///// ///// ///// ///// /////  AUTHORISED  ///// ///// ///// ///// ///// --> 
-	        	{% if is_granted("ROLE_ADMIN") %}
+			<!--  ///// ///// ///// ///// /////  AUTHORISED  ///// ///// ///// ///// ///// --> 
+        	{% if is_granted("ROLE_ADMIN") %}
 
-	        		<!-- BEGIN nav admin -->
-			          {% include 'includes/nav_admin.html.twig' %}
-			        <!-- END nav admin -->
+			  	<div id="section_admin" class="row center">
+					<div class="row92">
+		    			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 left">
+							<br/><br/>
+							<h3 class="left">
+								Paginas :
+							</h3>
+							{% if paginas|length > 0 %}
+								<ul class="list_no_style_li list_articles_admin">
+									{% for single_article in paginas %}
+										<li class="article_link {% if single_article == paginaPedida %}li_article_active{% endif %}" id="article_n_{{ single_article.id }}">
+											<a href="javascript:displaySelectedArticle('{{ path('ma_user_article_spe', {'articleId':single_article.id}) }}', 'article_n_{{ single_article.id }}')" class="no_style_a">
+												{{ single_article.title|truncate(40, false, '...') }}
+											</a>
+											<span class="float-right arrow_article">
+												<img src="{{ asset('img/system/defaults/right_arrow.png') }}" alt=""/>
+											</span>
+											<span class="float-right date_article">
+												{% if single_article.createdAt|length > 0 %}
+													{{ single_article.createdAt|date('d M Y') }}
+												{% else %}
+													(Vide)
+												{% endif %}
+											</span>
+										</li>
+									{% endfor %}
+								</ul>
+							{% else %}
+								Ningun pagina
+							{% endif %}
+						</div>
 
-				  	<div id="section_admin" class="row center">
-						<br/><br/><br/>
-						<strong>
-							Bienvenu à nouveau sur l'administration de ce site web !
-						</strong>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 border_black_left">
+							<div id="article_content">
+								<div class="row">
+				    				<a class="btn btn-action-admin float-left" href="{{ path('dv_user_pagina_nueva') }}">
+				    					Nueva
+				    				</a>
+				    				{% if paginas|length > 0 %}
+				    				<a class="btn btn-action-admin float-right logout-btn-admin"  href="javascript:areYouSureDeleteArticle('{{ path('ma_user_article_delete', {'articleId':paginaPedida.id}) }}')">
+				    					Suprimir
+				    				</a>
+				    				<a class="btn btn-action-admin float-right"  href="{{ path('ma_user_article_edit', {'articleId':paginaPedida.id}) }}">
+				    					Modificar
+				    				</a>
+				    				{% endif %}
+				    			</div>
+				    			<br/><br/>
+				    			<div class="row left">
+				    				
+									{% if paginaPedida %}
+									<div class="thumbnail">
+										<div class="caption">
+											<div class="row">
+												<div class="inline_div">
+													<h4>
+														{% if paginaPedida.nombre|length > 0 %}
+															{{ paginaPedida.nombre|raw }}
+														{% else %}
+															(Titre vide)
+														{% endif %}
+													</h4>
+												</div>
+												<div class="inline_div float-right date_article_lg">
+													{% if paginaPedida.ultimaModificacion|length > 0 %}
+														le {{ paginaPedida.ultimaModificacion|date('d M Y') }} à {{ paginaPedida.ultimaModificacion|date('H:i') }}
+													{% endif %}
+												</div>
+											</div>
+											
+											<div class="row">
+												{% if paginaPedida.contenido|length > 0 %}
+													{{ paginaPedida.contenido|raw }}
+												{% else %}
+													(Pagina vacía)
+												{% endif %}
+											</div>
+										</div>
+									</div>
+									{% endif %}
+				    			</div>
+							</div>
+						</div>
+	    			</div>
+			  	</div>
+			  	
+        	{% else %}
+        		<div>
+        			<br/><br/><br/><br/><br/>
+        			Usted no esta autorizado a acceder a esta parte del sitio!
+        		</div>
+        	{% endif %}
 
-						<!-- ADMIN JAVASCRIPTS -->
-					    {% javascripts 
-					      'js/admin_javascripts_misAnd.js'
-
-					      %}
-					      <script type="text/javascript" src="{{ asset_url }}"></script>
-					    {% endjavascripts %}
-					    <!-- END ADMIN JAVASCRIPTS -->
-				  	</div>
-				  	
-	        	{% else %}
-	        		<div>
-	        			<br/><br/><br/><br/><br/>
-	        			Vous n'êtes pas autorisé(e) à naviguer dans cette partie du site !
-	        		</div>
-	        	{% endif %}
-
-			</div>
 		</div>
 	</div>
 	<!-- END CONTENT -->
 
-{% endblock MA_User_body %}
+{% endblock DV_User_body %}
