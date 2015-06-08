@@ -49,7 +49,7 @@ class UserController extends Controller
     {
     	$pagina = $this ->getDoctrine()
 	                        ->getManager()
-	                        ->getRepository('DVMainBundle:Article')
+	                        ->getRepository('DVMainBundle:Pagina')
 	                        ->find($paginaId);
 
         // On utiliser le OrdersType
@@ -60,15 +60,17 @@ class UserController extends Controller
 
         // On vérifie que les valeurs entrées sont correctes
         if ($formNewPagina->isValid()) {
+            $pagina->setUltimaModificacion(new \Datetime);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($pagina);
             $em->flush();
 
             // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_homepage'));
+            return $this->redirect($this->generateUrl('dv_user_homepage'));
         }
 
-        return $this->render('DVMainBundle:Main:paginaNueva.html.twig', array(
+        return $this->render('DVUserBundle:User:paginaNueva.html.twig', array(
             'formNewPagina' => $formNewPagina->createView()
         ));
     }
@@ -85,12 +87,14 @@ class UserController extends Controller
 
         // On vérifie que les valeurs entrées sont correctes
         if ($formNewPagina->isValid()) {
+            $pagina->setUltimaModificacion(new \Datetime);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($pagina);
             $em->flush();
 
             // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_index'));
+            return $this->redirect($this->generateUrl('dv_user_homepage'));
         }
 
         return $this->render('DVUserBundle:User:paginaNueva.html.twig', array(
@@ -130,11 +134,9 @@ class UserController extends Controller
         ));
     }
 
-    public function photoNewAction($type)
+    public function fotoNuevaAction()
     {
         $foto = new Foto;
-
-        $foto->setCategory($type);
 
         // On utiliser le OrdersType
         $formNewFoto = $this->createForm(new FotoType(), $foto);
@@ -152,13 +154,12 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('ma_user_fotos'));
         }
 
-        return $this->render('DVUserBundle:User:photoNuevo.html.twig', array(
-            'formNewFoto' => $formNewFoto->createView(),
-            'type' => $type
+        return $this->render('DVUserBundle:User:fotoNueva.html.twig', array(
+            'formNewFoto' => $formNewFoto->createView()
         ));
     }
 
-    public function photoDeleteAction($fotoId, $type)
+    public function fotoSuprimirAction($fotoId)
     {
         $foto = $this ->getDoctrine()
                             ->getManager()

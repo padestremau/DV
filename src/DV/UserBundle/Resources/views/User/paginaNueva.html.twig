@@ -16,6 +16,8 @@
 
 		<div id="page_content">
 
+			<br/><br/>
+
 			<!--  ///// ///// ///// ///// /////  AUTHORISED  ///// ///// ///// ///// ///// --> 
         	{% if is_granted("ROLE_ADMIN") %}
 
@@ -42,7 +44,7 @@
 			                  {% endif %}
 							<div class="row80">
 								<div class="form-group">
-							        {{ form_label(formNewPagina.nombre, 'Titre', 
+							        {{ form_label(formNewPagina.nombre, 'Titulo', 
 							        	{'label_attr': {'class': 'control-label'}}) }}
 							        {% if form_errors(formNewPagina.nombre) %}
 					                    <div class="error_message">
@@ -58,13 +60,13 @@
 									<div class="input-icon">
 							        	<i class="fa fa-user"></i>
 							        	{% set opt_title = {'attr': {'class': 'form-control placeholder-no-fix',
-							        		'type':'text', 'placeholder':"L'arrivée majestueuse d'un article à propos d'un sujet en particulier", 'id':'_title', 
+							        		'type':'text', 'placeholder':"Titulo de la pagina", 'id':'_title', 
 							        		'name':'_title'}} %}
 							        	{{ form_widget(formNewPagina.nombre, opt_title) }}
 							        </div>
 								</div>
 								<div class="form-group">
-							        {{ form_label(formNewPagina.contenido, 'Contenu', 
+							        {{ form_label(formNewPagina.contenido, 'Contenido', 
 							        	{'label_attr': {'class': 'control-label'}}) }}
 							        {% if form_errors(formNewPagina.contenido) %}
 					                    <div class="error_message">
@@ -80,7 +82,7 @@
 									<div class="input-icon">
 							        	<i class="fa fa-user"></i>
 							        	{% set opt_content = {'attr': { 'class': 'redactor',
-							        		'placeholder':"L'arrivée majestueuse d'un contenu d'article, à propos d'un sujet en particulier", 'id':'_content', 
+							        		'placeholder':"Contenido de la pagina", 'id':'_content', 
 							        		'name':'_content'}} %}
 							        	{{ form_widget(formNewPagina.contenido, opt_content) }}
 							        </div>
@@ -94,7 +96,7 @@
 								<!-- Et pour le reste du formulaire ... ;) -->
 								{{ form_widget(formNewPagina) }}
 								<div class="center">
-									<input type="submit" class="btn btn-log" value="Enregistrer"/>
+									<input type="submit" class="btn btn-log" value="Guardar"/>
 								</div>
 							</div>
 						</form>

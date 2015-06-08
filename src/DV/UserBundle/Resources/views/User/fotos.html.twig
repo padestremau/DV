@@ -20,6 +20,13 @@
         	{% if is_granted("ROLE_ADMIN") %}
 
 			  	<div id="section_admin" class="row center">
+
+			  		<div class="row">
+			  			<a class="btn btn-action-admin float-left" href="{{ path('dv_user_fotos_anadir') }}">
+	    					Añadir
+	    				</a>
+			  		</div>
+
 					<div class="row">
 	    				{% if fotos|length > 0 %}
 							{% for foto in fotos %}

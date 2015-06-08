@@ -1,16 +1,9 @@
-{# src/MA/UserBundle/Resources/view/layout.html.twig #}
+{# src/DV/UserBundle/Resources/view/layout.html.twig #}
 {% set route = app.request.attributes.get( '_route' ) %}
 
 {% extends "::index_base.html.twig" %}
 
 {% block body %}
-
-  {# On affiche les messages flash que définissent les contrôleurs du bundle #}
-  {# for key, message in app.session.flashbag.all() %}
-    <div class="alert alert-{{ key }}">
-      {{ message|trans({}, 'FOSUserBundle') }}
-    </div>
-  {% endfor #}
 
   <!-- BEGIN CONTENT -->
   <div id="page_content" class="row">
@@ -28,12 +21,9 @@
                 <div class="row">
                   {% if route != 'fos_user_security_login' %}
                     <a href="{{ path('fos_user_security_login') }}" class="btn btn-log float-left top_button">
-                      {{ 'user.actions.back'|trans }}
+                      Atrás
                     </a>
                   {% endif %}
-                  <a href="{{ path('ma_main_homepage') }}" class="btn btn-log float-right top_button">
-                    {{ 'user.actions.home'|trans }}
-                  </a>
                 </div>
                 <!-- End Top Buttons -->
 
@@ -41,7 +31,7 @@
                     or (route == 'fos_user_resetting_reset') %}
 
                   <h2>
-                    {{ 'forgotPassword.titles.forgotPassword'|trans }}
+                    Olvido su contraseña?
                   </h2>
                   <hr/>
 
@@ -53,7 +43,7 @@
                 {% elseif (route == 'fos_user_change_password') %}
 
                   <h2>
-                    {{ 'resetPassword.titles.resetPassword'|trans }}
+                    Renovelar su contraseña
                   </h2>
                   <hr/>
 
@@ -62,11 +52,11 @@
                     <form action="{{ path('fos_user_change_password') }}" {{ form_enctype(form) }} method="POST" class="fos_user_change_password login-form">
                       
                       <div class="form-group">
-                        {% set currentPassword_title = 'resetPassword.titles.enterOld' | trans %}
+                        {% set currentPassword_title = 'Entre su precedente contraseña' %}
                         {% if form_errors(form.current_password) %}
                           <div class="error_message">
                             <span class="warning_word">
-                              {{ 'user.warning.warning'|trans }}
+                              Cuidado!
                             </span>
                             <span class="warning_message">
                               {{ form_errors(form.current_password) }}
@@ -82,11 +72,11 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        {% set new_password_title = 'resetPassword.titles.enterNew' | trans %}
+                        {% set new_password_title = 'Entre su nueva contraseña' %}
                         {% if form_errors(form.plainPassword.first) %}
                           <div class="error_message">
                             <span class="warning_word">
-                              {{ 'user.warning.warning'|trans }}
+                              Cuidado!
                             </span>
                             <span class="warning_message">
                               {{ form_errors(form.plainPassword.first) }}
@@ -102,11 +92,11 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        {% set new_password_confirmation_title = 'resetPassword.titles.reEnterNew' | trans %}
+                        {% set new_password_confirmation_title = 'Entrela de nuevo' %}
                         {% if form_errors(form.plainPassword.second) %}
                           <div class="error_message">
                             <span class="warning_word">
-                              {{ 'user.warning.warning'|trans }}
+                              Cuidado!
                             </span>
                             <span class="warning_message">
                               {{ form_errors(form.plainPassword.second) }}
@@ -123,7 +113,7 @@
                       </div>
                       <div class="form-actions">
                         <button type="submit" class="btn btn-log pull-right">
-                          {{ 'resetPassword.actions.changePassword'|trans }}
+                          Cambiar
                         </button>
                       </div>
                       <!-- Et le reste du formulaire ... :) -->
@@ -137,7 +127,7 @@
               {% elseif (route == 'fos_user_registration_register') %}
 
                 <h2>
-                  {{ 'registerUser.titles.signUp'|trans }}
+                  Registrarse
                 </h2>
                 <hr/>
 
@@ -148,7 +138,7 @@
                       {% if form_errors(form) %}
                         <div class="error_message">
                           <span class="warning_word">
-                            {{ 'user.warning.warning'|trans }}
+                            Cuidado!
                           </span>
                           <span class="warning_message">
                             {{ form_errors(form) }}
@@ -158,11 +148,11 @@
                       {% endif %}
 
                     <div class="form-group">
-                      {% set username_input = 'registerUser.titles.username' | trans %}
+                      {% set username_input = 'Nombre de usuario' %}
                       {% if form_errors(form.username) %}
                         <div class="error_message">
                           <span class="warning_word">
-                            {{ 'user.warning.warning'|trans }}
+                            Cuidado!
                           </span>
                           <span class="warning_message">
                             {{ form_errors(form.username) }}
@@ -180,11 +170,11 @@
                     </div>
 
                     <div class="form-group">
-                      {% set email_input = 'registerUser.titles.email' | trans %}
+                      {% set email_input = 'E-mail' %}
                       {% if form_errors(form.email) %}
                         <div class="error_message">
                           <span class="warning_word">
-                            {{ 'user.warning.warning'|trans }}
+                            Cuidado!
                           </span>
                           <span class="warning_message">
                             {{ form_errors(form.email) }}
@@ -202,11 +192,11 @@
                     </div>
 
                      <div class="form-group">
-                      {% set password_input = 'registerUser.titles.password' | trans %}
+                      {% set password_input = 'Contraseña' %}
                       {% if form_errors(form.plainPassword.first) %}
                         <div class="error_message">
                           <span class="warning_word">
-                            {{ 'user.warning.warning'|trans }}
+                            Cuidado!
                           </span>
                           <span class="warning_message">
                             {{ form_errors(form.plainPassword.first) }}
@@ -224,11 +214,11 @@
                     </div>
 
                     <div class="form-group">
-                      {% set rePassword_input = 'registerUser.titles.rePassword' | trans %}
+                      {% set rePassword_input = 'Contraseña de nuevo' %}
                       {% if form_errors(form.plainPassword.second) %}
                         <div class="error_message">
                           <span class="warning_word">
-                            {{ 'user.warning.warning'|trans }}
+                            Cuidado!
                           </span>
                           <span class="warning_message">
                             {{ form_errors(form.plainPassword.second) }}
@@ -252,19 +242,19 @@
                             <input type="checkbox" id="conditions" name="_conditions" value="on" required="required"/>
                           </span>
                         </div> 
-                        {{ 'registerUser.titles.iAgreeToThe'|trans }}
+                        Soy de acuerdo con
                         <a href="#">
-                          {{ 'registerUser.titles.TermsOfService'|trans }}
+                          las condiciónes de uso
                         </a>
-                        {{ 'registerUser.titles.and'|trans }}
+                        y
                         <a href="#">
-                          {{ 'registerUser.titles.PrivacyPolicy'|trans }}
+                          y las policías de vida privada
                         </a>
                       </label>
                     </div>
                     <div class="form-actions center">
                       <button type="submit" id="register-submit-btn" class="btn">
-                        {{ 'registerUser.actions.signUp'|trans }}
+                        Registrar
                       </button>
                     </div>
 
@@ -276,7 +266,7 @@
 
               {% elseif route == 'fos_user_security_login' %}
                 <h2>
-                  {{ 'login.titles.loginTitle'|trans }}
+                  Connección
                 </h2>
                 <hr/>
 
@@ -288,7 +278,7 @@
                         {% if error %}
                             <div class="error_message">
                               <span class="warning_word">
-                                {{ 'user.warning.warning'|trans }}
+                                Cuidado!
                               </span>
                               <span class="warning_message">
                                 {{ error|trans }}
@@ -300,18 +290,18 @@
                       <div class="form-group">
                         <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                         <label class="control-label visible-ie8 visible-ie9" for="username">
-                          {{ 'login.titles.email'|trans }}
+                          Email
                         </label>
                         <div class="input-icon">
-                          <input class="form-control placeholder-no-fix" type="text" placeholder="{{ 'login.titles.email'|trans }}" value="{{ last_username }}" id="username" name="_username" required="required" autofocus>
+                          <input class="form-control placeholder-no-fix" type="text" placeholder="Email" value="{{ last_username }}" id="username" name="_username" required="required" autofocus>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label visible-ie8 visible-ie9" for="password">
-                          {{ 'login.titles.password'|trans }}
+                          Contrasena
                         </label>
                         <div class="input-icon">
-                          <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="{{ 'login.titles.password'|trans }}" id="password" name="_password" required="required">
+                          <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Contraseña" id="password" name="_password" required="required">
                         </div>
                       </div>
                       <div class="form-actions">
@@ -322,12 +312,12 @@
                                 <input type="checkbox" id="remember_me" name="_remember_me" value="on">
                               </span>
                             </div> 
-                            {{ 'login.actions.remember_me'|trans }}
+                            Recordese de mi
                           </label>
                         </div>
                         <div class="center">
-                          <button type="submit" data-loading-text="{{ 'welcome.buttons.loading' | trans }}" class="demo-loading-btn btn btn-log center">
-                            {{ 'login.actions.login'|trans }}
+                          <button type="submit" class="btn btn-log center">
+                            Conectarse
                           </button>
                         </div>
                       </div>
@@ -337,7 +327,7 @@
                       <div class="forget-password center">
                         <a href="{{ path('fos_user_resetting_request') }}">
                           <strong>
-                            {{ 'login.titles.forgetPassword'|trans }}
+                            Contraseña olvidada?
                           </strong>
                         </a> 
                       </div>
@@ -348,97 +338,95 @@
 
               {% elseif route == 'fos_user_registration_check_email' %}
                 <h2>
-                  {{ 'check.actions.checkEmail'|trans }}
+                  Averiguar sus emails
                 </h2>
                 <hr/>
 
                 <br/><br/><br/><br/><br/><br/><br/>
 
                 <div class="center">
-                  {{ 'check.titles.welcome'|trans }}
+                  Bienvenido en nuestro sitio! Por favor, averigue sus emails.
                   <br/>
                   <strong>
-                    {{ 'team.signature.team'|trans }}
+                    Deo Volente
                   </strong>
                 </div>
 
               {% elseif route == 'fos_user_registration_confirm' %}
                 <h2>
-                  {{ 'check.actions.pleaseConfirm'|trans }}
+                  Confirmar su email
                 </h2>
                 <hr/>
 
                 <br/><br/><br/><br/><br/><br/><br/>
 
                 <div class="center">
-                  {{ 'check.titles.confirm'|trans }}
+                  Por favor, confirme su email.
                   <br/>
                   <strong>
-                    {{ 'team.signature.team'|trans }}
+                    Deo Volente
                   </strong>
                 </div>
 
               {% elseif route == 'fos_user_resetting_send_email' 
                       or route == 'fos_user_resetting_check_email' %}
                 <h2>
-                  {{ 'check.actions.checkEmail'|trans }}
+                  AVeriguar sus emails
                 </h2>
                 <hr/>
 
                 <br/><br/><br/><br/><br/><br/><br/>
 
                 <div class="center">
-                  {{ 'check.titles.confirmEmailForPassword'|trans }}
+                  Por favor, averigue su email para su nueva contraseña.
                   <br/>
                   <strong>
-                    {{ 'team.signature.team'|trans }}
+                    Deo Volente
                   </strong>
                 </div>
 
               {% elseif route == 'fos_user_registration_confirmed' %}
                 <h2>
-                  Done!
+                  Gracias!
                 </h2>
                 <hr/>
 
                 <br/><br/><br/><br/><br/><br/><br/>
 
                 <div class="center">
-                  {{ 'check.titles.allGood'|trans }}
-                  <br/>
-                  {{ 'check.titles.participate'|trans }}
+                  Todo esta bien. Gracias por su ayuda.
                   <strong>
-                    {{ 'team.signature.team'|trans }}
+                    Deo Volente
                   </strong>
                   <br/><br/>
-                  <a href="{{ path('ma_presentation_route') }}" class="center btn-log no_style_a">
-                    {{ 'check.link.route'|trans }}
+                  <a href="{{ path('dv_main_homepage') }}" class="center btn-log no_style_a">
+                    Atrás
                   </a>
                 </div>
 
               {% else %}
                 <h2>
-                  {{ 'check.actions.done'|trans }}
+                  Gracias!
                 </h2>
                 <hr/>
 
                 <br/><br/><br/><br/><br/>
 
                 <div class="center">
-                  {{ 'check.titles.allGood'|trans }}
+                  Todo esta bien. Gracias por su ayuda.
                   <br/>
                   <strong>
-                    {{ 'team.signature.team'|trans }}
+                    Deo Volente
                   </strong>
                 </div>
 
                 <br/><br/>
 
                 <div class="center italic">
-                  {{ 'check.titles.anyProblem'|trans }}
+                  Si usted encontra cualquier problema, contacte el 
                   <br/><br/>
-                  <a href="{{ path('ma_presentation_contact') }}" class="center btn-log no_style_a">
-                    {{ 'check.link.contact'|trans }}
+                  <a href="{{ path('dv_main_contact') }}" class="center btn-log no_style_a">
+                    webmaster
                   </a>
                 </div>
               {% endif %}

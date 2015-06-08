@@ -918,12 +918,12 @@ blockquote p {
 #nav_header_admin ul li:hover ~ li:last-child::after,
 #nav_header_admin ul li:last-child:hover::after{background: rgba(27,66,157,0.88);}
 
-#nav_header_admin ul li:nth-child(1):hover ~ li:last-child::after {left:2.75% !important;width:11% !important;}
+#nav_header_admin ul li:nth-child(1):hover ~ li:last-child::after {left:6.75% !important;width:11% !important;}
 #nav_header_admin ul li:nth-child(1).header_active_admin ~ li:last-child::after{left:2.75%;width:11%;}
-#nav_header_admin ul li:nth-child(2):hover ~ li:last-child::after {left:14.75% !important;width:11% !important;}
-#nav_header_admin ul li:nth-child(2).header_active_admin ~ li:last-child::after{left:14.75%;width:11%;}
-#nav_header_admin ul li:last-child.header_active_admin::after{left:74.75%;width:11%;}
-#nav_header_admin ul li:last-child:hover::after{left:74.75% !important;width:11% !important;}
+#nav_header_admin ul li:nth-child(2):hover ~ li:last-child::after {left:18.25% !important;width:11% !important;}
+#nav_header_admin ul li:nth-child(2).header_active_admin ~ li:last-child::after{left:18.25%;width:11%;}
+#nav_header_admin ul li:last-child.header_active_admin::after{left:29.75%;width:11%;}
+#nav_header_admin ul li:last-child:hover::after{left:29.75% !important;width:11% !important;}
 
 .btn-log {
 	background-color: transparent;

@@ -1,0 +1,91 @@
+{# src/DV/UserBundle/Resources/User/indexUser.html.twig #}
+
+{% extends "DVUserBundle::user_general.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Admin - Fotos
+{% endblock %}
+
+{% block DV_User_body %}
+
+	<!-- BEGIN CONTENT -->
+	<div id="page_toLoad" class="row">
+
+		<div id="sessionFlash" class="sessionFlash">
+		</div>
+
+		<div id="page_content">
+
+			<!--  ///// ///// ///// ///// /////  AUTHORISED  ///// ///// ///// ///// ///// --> 
+        	{% if is_granted("ROLE_ADMIN") %}
+
+			  	<div id="section_admin" class="row center">
+
+			  		<div class="row">
+			  			<a class="btn btn-action-admin float-left" href="{{ path('dv_user_fotos') }}">
+	    					Atrás
+	    				</a>
+			  		</div>
+
+					<div class="row">
+	    				<form method="post" {{ form_enctype(formNewFoto) }}>
+			        		{% if form_errors(formNewFoto) %}
+			                    <div class="error_message">
+			                      <span class="warning_word">
+			                        {{ 'user.warning.warning'|trans }}
+			                      </span>
+			                      <span class="warning_message">
+			                        {{ form_errors(formNewFoto) }}
+			                      </span>
+			                    </div>
+			                    <br/>
+			                  {% endif %}
+							<div class="row80">
+
+								<div class="form-group">
+									{{ form_label(formNewFoto.file, "Nueva foto", 
+							        	{'label_attr': {'class': 'control-label'}}) }}
+							        {% if form_errors(formNewFoto.file) %}
+					                    <div class="error_message">
+					                      	<span class="warning_word">
+					                        	{{ 'user.warning.warning'|trans }}
+					                      	</span>
+					                      	<span class="warning_message">
+					                        	{{ form_errors(formNewFoto.file) }}
+					                      	</span>
+					                    </div>
+					                    <br/>
+					                {% endif %}
+									<div class="input-icon">
+							        	<i class="fa fa-user"></i>
+							        	{% set opt_file = {'attr': {'type':'file', 'id':'file', 'name':'_file'}} %}
+							        	{{ form_widget(formNewFoto.file, opt_file) }}
+							        </div>
+								</div>
+
+								<div>
+									<br/><br/>
+								</div>
+
+								<!-- Et pour le reste du formulaire ... ;) -->
+								{{ form_widget(formNewFoto) }}
+								<div class="center">
+									<input type="submit" class="btn btn-log" value="Salvar"/>
+								</div>
+							</div>
+						</form>
+	    			</div>
+			  	</div>
+			  	
+        	{% else %}
+        		<div>
+        			<br/><br/><br/><br/><br/>
+        			Usted no esta autorizado a acceder a esta parte del sitio!
+        		</div>
+        	{% endif %}
+
+		</div>
+	</div>
+	<!-- END CONTENT -->
+
+{% endblock DV_User_body %}
