@@ -96,7 +96,7 @@ dv_redactor:
             # maxHeight:              1000
             folders: false
         settings:
-            lang:                   fr
+            # lang:                   fr
             minHeight:              200
             plugins:                ['fullscreen']
             tabindex : 0

@@ -1005,6 +1005,15 @@ blockquote p {
 	opacity: 1 !important;
 }
 
+.arrow_article {
+	width: 20px;
+}
+.date_article {
+	font-style: italic;
+	font-size: 0.8em;
+	margin-right: 8px;
+}
+
 .list_articles_admin {
 	margin: 0;
 	margin-left: 0px;
@@ -1016,6 +1025,10 @@ blockquote p {
 	margin-bottom: 4px;
 	padding: 5px !important;
 	text-align: left !important;
+	border: 1px solid transparent;
+}
+.list_articles_admin li:hover {
+	border: 1px solid rgba(27,66,157,0.88);
 }
 .article_photo_admin {
 	border: 3px solid rgba(27,66,157,0.88);
