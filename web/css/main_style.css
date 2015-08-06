@@ -1028,7 +1028,12 @@ blockquote p {
 	border: 1px solid transparent;
 }
 .list_articles_admin li:hover {
-	border: 1px solid rgba(27,66,157,0.88);
+	border: 1px solid rgba(27,66,157,0.2) !important;
+	border-radius: 4px;
+}
+.li_article_active {
+	border: 1px solid rgba(27,66,157,0.88) !important;
+	border-radius: 4px;
 }
 .article_photo_admin {
 	border: 3px solid rgba(27,66,157,0.88);

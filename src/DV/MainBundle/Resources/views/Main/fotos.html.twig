@@ -147,6 +147,12 @@
 
 				        <!-- Slides Container -->
 				        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 356px; overflow: hidden;">
+				        	{# for foto in fotos %}
+				        		<div>
+					                <img u="image" src="{{ asset(foto.webPath) }}" />
+					                <img u="thumb" src="{{ asset('img/fotos/thumb-001.jpg') }}" />
+					            </div>
+				        	{% endfor #}
 				            <div>
 				                <img u="image" src="{{ asset('img/fotos/001.jpg') }}" />
 				                <img u="thumb" src="{{ asset('img/fotos/thumb-001.jpg') }}" />
@@ -275,6 +281,10 @@
 				    </div>
 				    <!-- Jssor Slider End -->
 				</div>
+				<br/><br/>
+				<br/><br/>
+				<br/><br/>
+				<br/><br/>
 				<br/><br/>
 			</div>	
 

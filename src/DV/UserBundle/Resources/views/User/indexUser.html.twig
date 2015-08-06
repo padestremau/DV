@@ -33,8 +33,8 @@
 							{% if paginas|length > 0 %}
 								<ul class="list_no_style_li list_articles_admin">
 									{% for pagina in paginas %}
-										<li class="article_link {% if pagina == paginaPedida %}li_article_active{% endif %}" id="article_n_{{ pagina.id }}">
-											<a href="" class="no_style_a">
+										<li class="{% if pagina == paginaPedida %}li_article_active{% endif %}" id="article_n_{{ pagina.id }}">
+											<a href="{{ path('dv_user_paginas', {'paginaId':pagina.id}) }}" class="no_style_a">
 												{{ pagina.nombre|truncate(40, false, '...') }}
 											</a>
 											<span class="float-right arrow_article">

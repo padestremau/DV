@@ -106,7 +106,7 @@ class MainController extends Controller
         $senderContent = $_POST['corpsMail'];
 
         // Message for client
-        $message = \Swift_Message::newInstance()
+        $messageClient = \Swift_Message::newInstance()
             ->setContentType('text/html')
             ->setSubject('[Deo Volente]')
             ->setFrom(array('info@deovolente.com.pe' => 'Deo Volente'))
@@ -122,8 +122,27 @@ class MainController extends Controller
                 )
             )
         ;
+
+        // Message for admin
+        $messageAdmin = \Swift_Message::newInstance()
+            ->setContentType('text/html')
+            ->setSubject('[Deo Volente]')
+            ->setFrom(array($senderEmail => $senderName))
+            ->setTo(array('p.a.destremau@gmail.com' => 'Deo Volente'))
+            ->setBody(
+                $this->renderView('DVMainBundle:Main:emailAdmin.html.twig',
+                    array(  'senderName' => $senderName,
+                            'senderEmail' => $senderEmail,
+                            'senderCel' => $senderCel,
+                            'senderPais' => $senderPais,
+                            'senderContent' => $senderContent
+                            )
+                )
+            )
+        ;
         
-        $this->get('mailer')->send($message);   
+        $this->get('mailer')->send($messageClient);
+        $this->get('mailer')->send($messageAdmin);
 
         // On redirige vers la page de visualisation de le document nouvellement créé
         return $this->redirect($this->generateUrl('dv_main_contact_enviado'));

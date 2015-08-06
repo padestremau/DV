@@ -151,7 +151,7 @@ class UserController extends Controller
             $em->flush();
 
             // On redirige vers la page de visualisation de le document nouvellement créé
-            return $this->redirect($this->generateUrl('ma_user_fotos'));
+            return $this->redirect($this->generateUrl('dv_user_fotos'));
         }
 
         return $this->render('DVUserBundle:User:fotoNueva.html.twig', array(
@@ -175,6 +175,6 @@ class UserController extends Controller
         $em->flush();
 
         // On redirige vers la page de visualisation de le document nouvellement créé
-        return $this->redirect($this->generateUrl('ma_user_fotos'));
+        return $this->redirect($this->generateUrl('dv_user_fotos'));
     }
 }

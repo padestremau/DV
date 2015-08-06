@@ -24,6 +24,13 @@ class Pagina
     /**
      * @var string
      *
+     * @ORM\Column(name="codigo", type="string", length=255)
+     */
+    private $codigo;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
@@ -74,6 +81,29 @@ class Pagina
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set codigo
+     *
+     * @param string $codigo
+     * @return Pagina
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return string 
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
     }
 
     /**

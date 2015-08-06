@@ -21,11 +21,19 @@
 
 			  	<div id="section_admin" class="row center">
 
+			  		<br/><br/>
+
 			  		<div class="row">
 			  			<a class="btn btn-action-admin float-left" href="{{ path('dv_user_fotos') }}">
 	    					Atrás
 	    				</a>
 			  		</div>
+
+			  		<br/>
+
+			  		<h3>
+			  			Nueva foto
+			  		</h3>
 
 					<div class="row">
 	    				<form method="post" {{ form_enctype(formNewFoto) }}>
@@ -43,8 +51,6 @@
 							<div class="row80">
 
 								<div class="form-group">
-									{{ form_label(formNewFoto.file, "Nueva foto", 
-							        	{'label_attr': {'class': 'control-label'}}) }}
 							        {% if form_errors(formNewFoto.file) %}
 					                    <div class="error_message">
 					                      	<span class="warning_word">

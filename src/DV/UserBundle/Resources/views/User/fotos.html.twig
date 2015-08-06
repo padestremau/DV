@@ -21,11 +21,19 @@
 
 			  	<div id="section_admin" class="row center">
 
+			  		<br/><br/>
+
 			  		<div class="row">
 			  			<a class="btn btn-action-admin float-left" href="{{ path('dv_user_fotos_anadir') }}">
 	    					Añadir
 	    				</a>
 			  		</div>
+
+			  		<br/>
+			  		<h3>
+			  			Fotos
+			  		</h3>
+			  		<br/>
 
 					<div class="row">
 	    				{% if fotos|length > 0 %}
@@ -35,10 +43,11 @@
 										<div class="photo_default" style="width: 100%; min-height:100px; background-image: url('{{ asset( foto.webPath) }}'); background-size: cover; background-position: 50%;" alt="{{ foto.alt }}">
 					                    </div>
 									</div>
+									<br/>
 									<strong>
-										{{ foto.nombre }}
+										Añadido el {{ foto.creado|date('d/m/y') }}
 									</strong>
-									<a href="javascript:areYouSureDeletePhoto('{{ path('ma_user_photo_delete', {'type':type, 'photoId':foto.id}) }}')">
+									<a href="javascript:seguroSuprimir('{{ path('dv_user_fotos_suprimir', {'fotoId':foto.id}) }}')">
 	                              		<button class="btn btn-delete-admin">
 		                              		<span class="glyphicon black glyphicon-trash" aria-hidden="true"></span>
 	                              		</button>
@@ -53,6 +62,23 @@
 						{% endif %}
 	    			</div>
 			  	</div>
+
+			  	<script type="text/javascript">
+			  		function seguroSuprimir(path) {
+						if (confirm('Seguro que desea suprimir esta foto ?')) {
+							window.location = path;
+						}
+					}
+
+					var photWid = $('.photo_default').width();
+					var photHei = $('.photo_default').height();
+					if (photWid > photHei) {
+						$('.photo_default').css({'height': photWid+'px'});
+					}
+					else {
+						$('.photo_default').css({'width': photHei+'px'});
+					}
+			  	</script>
 			  	
         	{% else %}
         		<div>

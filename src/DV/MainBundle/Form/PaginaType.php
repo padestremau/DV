@@ -16,6 +16,7 @@ class PaginaType extends AbstractType
     {
         $builder
             ->add('nombre', 'text', array('label' => 'Nombre de la Pagina'))
+            // ->add('codigo', 'text', array('label' => 'Codigo de la Pagina'))
             ->add('contenido','redactor', array( 
                                             "redactor"=>"admin_pagina",
                                             'label' => 'Contenido'

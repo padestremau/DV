@@ -31,3 +31,9 @@ dv_user_fotos:
 dv_user_fotos_anadir:
     path:     /fotos/anadir
     defaults: { _controller: DVUserBundle:User:fotoNueva }
+
+dv_user_fotos_suprimir:
+    path:     /fotos/suprimir/{fotoId}
+    defaults: { _controller: DVUserBundle:User:fotoSuprimir }
+    requirements:
+        fotoId: \d+
