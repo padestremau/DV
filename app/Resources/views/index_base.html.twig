@@ -33,39 +33,6 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-    {# if route != 'dv_user_homepage' 
-              and route != 'dv_user_paginas'
-              and route != 'dv_user_pagina_modif'
-              and route != 'dv_user_pagina_nueva'
-              and route != 'dv_user_pagina_supr'
-              and route != 'dv_user_fotos'
-              and route != 'dv_user_fotos_anadir'
-              and route != 'fos_user_security'
-              and route != 'fos_user_profile'
-              and route != 'fos_user_register'
-              and route != 'fos_user_resetting'
-              and route != 'fos_user_change_password'
-              %}
-
-    {% stylesheets
-      'redactor/redactor.css'
-      'bundles/stpredactor/css/sonata.css'
-      %}
-      <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
-      {% endstylesheets %}
-      {% javascripts 
-      'redactor/redactor.js'
-      'redactor/fullscreen.js'
-      'redactor/en.js'
-      'bundles/stpredactor/js/script.js'
-      %}
-      <!-- 'jquery.autoSave.js'
-      'jquery.validate.min.js' -->
-      <script type="text/javascript" src="{{ asset_url }}"> </script>
-      {% endjavascripts %}
-
-    {% endif #}
-
     {% stylesheets
       'css/font.css'
       'css/main_style.css'
@@ -138,6 +105,7 @@
           'redactor/fullscreen.js'
           
           'bundles/stpredactor/js/script.js'
+
           %}
           <script type="text/javascript" src="{{ asset_url }}"> </script>
 

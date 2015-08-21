@@ -235,4 +235,27 @@ class Foto
     }
 
     /*   *********   End  File  *************  */
+
+    /**
+     * Set fotoThumb
+     *
+     * @param \DV\UserBundle\Entity\FotoThumb $fotoThumb
+     * @return Foto
+     */
+    public function setFotoThumb(\DV\UserBundle\Entity\FotoThumb $fotoThumb = null)
+    {
+        $this->fotoThumb = $fotoThumb;
+
+        return $this;
+    }
+
+    /**
+     * Get fotoThumb
+     *
+     * @return \DV\UserBundle\Entity\FotoThumb 
+     */
+    public function getFotoThumb()
+    {
+        return $this->fotoThumb;
+    }
 }

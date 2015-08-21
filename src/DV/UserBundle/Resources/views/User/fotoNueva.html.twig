@@ -35,6 +35,20 @@
 			  			Nueva foto
 			  		</h3>
 
+			  		<p class="left">
+			  			Por favor, para que salga bien la foto, tiene que ser proportionada asi :
+			  		</p>
+			  		<div class="row">
+				  		<div class="col-lg-2 col-md-1 hidden-sm hidden-xs"></div>
+				  		<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
+				  			<img src="{{ asset('img/system/defaults/default_sizing_foto.png') }}" alt="Default photo"/>
+				  		</div>
+				  		<div class="col-lg-2 col-md-1 hidden-sm hidden-xs"></div>
+			  			
+			  		</div>
+
+			  		<br/><br/>
+
 					<div class="row">
 	    				<form method="post" {{ form_enctype(formNewFoto) }}>
 			        		{% if form_errors(formNewFoto) %}
