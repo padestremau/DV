@@ -23,39 +23,40 @@
 
 			  	<div id="section_admin" class="row center">
 
-
-					<div class="row92">
+					<div class="row">
 		    			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 left">
 							<br/><br/>
-							<h3 class="left">
-								Paginas :
-							</h3>
-							{% if paginas|length > 0 %}
-								<ul class="list_no_style_li list_articles_admin">
-									{% for pagina in paginas %}
-										<li class="{% if pagina == paginaPedida %}li_article_active{% endif %}" id="article_n_{{ pagina.id }}">
-											<a href="{{ path('dv_user_paginas', {'paginaId':pagina.id}) }}" class="no_style_a">
-												{{ pagina.nombre|truncate(40, false, '...') }}
-											</a>
-											<span class="float-right arrow_article">
-												<img src="{{ asset('img/system/defaults/right_arrow.png') }}" alt=""/>
-											</span>
-											<span class="float-right date_article">
-												{% if pagina.ultimaModificacion|length > 0 %}
-													{{ pagina.ultimaModificacion|date('d M Y') }}
-												{% else %}
-													(Vacío)
-												{% endif %}
-											</span>
-										</li>
-									{% endfor %}
-								</ul>
-							{% else %}
-								Ningun pagina
-							{% endif %}
+							<div class="thumbnail thumbnail_page">
+								<h3 class="left">
+									Paginas :
+								</h3>
+								{% if paginas|length > 0 %}
+									<ul class="list_no_style_li list_articles_admin">
+										{% for pagina in paginas %}
+											<li class="{% if pagina == paginaPedida %}li_article_active{% endif %}" id="article_n_{{ pagina.id }}">
+												<a href="{{ path('dv_user_paginas', {'paginaId':pagina.id}) }}" class="no_style_a">
+													{{ pagina.nombre|truncate(40, false, '...') }}
+												</a>
+												<span class="float-right arrow_article">
+													<img src="{{ asset('img/system/defaults/right_arrow.png') }}" alt=""/>
+												</span>
+												<span class="float-right date_article">
+													{% if pagina.ultimaModificacion|length > 0 %}
+														{{ pagina.ultimaModificacion|date('d M Y') }}
+													{% else %}
+														(Vacío)
+													{% endif %}
+												</span>
+											</li>
+										{% endfor %}
+									</ul>
+								{% else %}
+									Ningun pagina
+								{% endif %}
+							</div>
 						</div>
 
-						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 border_black_left">
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 							<div id="article_content">
 								<div class="row">
 				    				<!-- <a class="btn btn-action-admin float-left" href="{{ path('dv_user_pagina_nueva') }}">
@@ -74,33 +75,29 @@
 				    			<div class="row left">
 				    				
 									{% if paginaPedida %}
-									<div class="thumbnail">
-										<div class="caption">
-											<div class="row">
-												<div class="inline_div">
-													<h4>
-														{% if paginaPedida.nombre|length > 0 %}
-															{{ paginaPedida.nombre|raw }}
-														{% else %}
-															(Titre vide)
-														{% endif %}
-													</h4>
-												</div>
-												<div class="inline_div float-right date_article_lg">
-													{% if paginaPedida.ultimaModificacion|length > 0 %}
-														el {{ paginaPedida.ultimaModificacion|date('d M Y') }} a las {{ paginaPedida.ultimaModificacion|date('H:i') }}
-													{% endif %}
-												</div>
-											</div>
-											
-											<div class="row">
-												{% if paginaPedida.contenido|length > 0 %}
-													{{ paginaPedida.contenido|raw }}
+									<div class="row">
+										<div class="inline_div">
+											<h4>
+												{% if paginaPedida.nombre|length > 0 %}
+													{{ paginaPedida.nombre|raw }}
 												{% else %}
-													(Pagina vacía)
+													(Titre vide)
 												{% endif %}
-											</div>
+											</h4>
 										</div>
+										<div class="inline_div float-right date_article_lg">
+											{% if paginaPedida.ultimaModificacion|length > 0 %}
+												el {{ paginaPedida.ultimaModificacion|date('d M Y') }} a las {{ paginaPedida.ultimaModificacion|date('H:i') }}
+											{% endif %}
+										</div>
+									</div>
+									
+									<div class="row">
+										{% if paginaPedida.contenido|length > 0 %}
+											{{ paginaPedida.contenido|raw }}
+										{% else %}
+											(Pagina vacía)
+										{% endif %}
 									</div>
 									{% endif %}
 				    			</div>

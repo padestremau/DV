@@ -18,12 +18,24 @@
 				Administración del sítio
 			</h1>
 			<ul class="list_no_style_li">
-				<li class="right_border_li {% if route == 'dv_user_homepage' %}header_active_admin{% endif %}">
+				<li class="right_border_li 
+					{% if route == 'dv_user_homepage' 
+						or route == 'dv_user_paginas'
+						or route == 'dv_user_pagina_modif'
+						or route == 'dv_user_pagina_nueva' %}
+						header_active_admin
+					{% endif %}
+					">
 					<a href="{{ path('dv_user_homepage') }}" class="no_style_a">
 						PAGINAS
 					</a>
 				</li><!---->
-				<li class="right_border_li {% if route == 'dv_user_fotos' %}header_active_admin{% endif %}">
+				<li class="right_border_li 
+					{% if route == 'dv_user_fotos' 
+						or route == 'dv_user_fotos_anadir' %}
+						header_active_admin
+					{% endif %}
+					">
 					<a href="{{ path('dv_user_fotos') }}" class="no_style_a">
 						FOTOS
 					</a>

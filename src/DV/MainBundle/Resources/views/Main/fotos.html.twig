@@ -152,7 +152,10 @@
 				        	{% for foto in fotos %}
 				        		<div>
 					                <img u="image" src="{{ asset(foto.webPath) }}" />
-					                <img u="thumb" src="{{ asset(foto.webPath) }}" />
+					                <!-- <div u="thumb" style="background-image: url('{{ asset(foto.webPath) }}'); background-size: cover; background-position: 50%;">
+					                	<img src="{{ asset("img/system/defaults/thumb_default.png") }}" />
+					                </div> -->
+					                <img u="thumb" src="{{ asset(foto.webPath) }}"/>
 					            </div>
 				        	{% endfor %}
 				            
@@ -230,11 +233,11 @@
 					</p>
 				{% endif %}
 
-				<br/><br/>
-				<br/><br/>
-				<br/><br/>
-				<br/><br/>
-				<br/><br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
 			</div>	
 
 

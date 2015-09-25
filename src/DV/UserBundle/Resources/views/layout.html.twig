@@ -15,256 +15,9 @@
 
         <div id="sectionContentAjax">
           <div class="row60" id="login_section">
-            <div id="login_content">    <!-- Element loading -->
+            <div id="login_content">
 
-                <!-- Begin Top Buttons -->
-                <div class="row">
-                  {% if route != 'fos_user_security_login' %}
-                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-log float-left top_button">
-                      Atrás
-                    </a>
-                  {% endif %}
-                </div>
-                <!-- End Top Buttons -->
-
-                {% if (route == 'fos_user_resetting_request') 
-                    or (route == 'fos_user_resetting_reset') %}
-
-                  <h2>
-                    Olvido su contraseña?
-                  </h2>
-                  <hr/>
-
-                  <div>
-                    {% block fos_user_content %}
-                    {% endblock fos_user_content %}
-                  </div>
-
-                {% elseif (route == 'fos_user_change_password') %}
-
-                  <h2>
-                    Renovelar su contraseña
-                  </h2>
-                  <hr/>
-
-                  <div>
-                    <!-- BEGIN RESETTNG PASSWORD FORM -->
-                    <form action="{{ path('fos_user_change_password') }}" {{ form_enctype(form) }} method="POST" class="fos_user_change_password login-form">
-                      
-                      <div class="form-group">
-                        {% set currentPassword_title = 'Entre su precedente contraseña' %}
-                        {% if form_errors(form.current_password) %}
-                          <div class="error_message">
-                            <span class="warning_word">
-                              Cuidado!
-                            </span>
-                            <span class="warning_message">
-                              {{ form_errors(form.current_password) }}
-                            </span>
-                          </div>
-                          <br/>
-                        {% endif %}
-                        <div class="input-icon">
-                          {% set opt_currentPassword = {'attr': {'class': 'form-control placeholder-no-fix',
-                            'type':'text', 'placeholder': currentPassword_title, 'id':'current_password', 
-                            'name':'_current_password', 'required':'required', 'autofocus':''}} %}
-                          {{ form_widget(form.current_password, opt_currentPassword) }}
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        {% set new_password_title = 'Entre su nueva contraseña' %}
-                        {% if form_errors(form.plainPassword.first) %}
-                          <div class="error_message">
-                            <span class="warning_word">
-                              Cuidado!
-                            </span>
-                            <span class="warning_message">
-                              {{ form_errors(form.plainPassword.first) }}
-                            </span>
-                          </div>
-                          <br/>
-                        {% endif %}
-                        <div class="input-icon">
-                          {% set opt_new_password = {'attr': {'class': 'form-control placeholder-no-fix',
-                            'type':'text', 'placeholder': new_password_title, 'id':'new_password', 
-                            'name':'_new_password', 'required':'required'}} %}
-                          {{ form_widget(form.plainPassword.first, opt_new_password) }}
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        {% set new_password_confirmation_title = 'Entrela de nuevo' %}
-                        {% if form_errors(form.plainPassword.second) %}
-                          <div class="error_message">
-                            <span class="warning_word">
-                              Cuidado!
-                            </span>
-                            <span class="warning_message">
-                              {{ form_errors(form.plainPassword.second) }}
-                            </span>
-                          </div>
-                          <br/>
-                        {% endif %}
-                        <div class="input-icon">
-                          {% set opt_new_password_confirmation = {'attr': {'class': 'form-control placeholder-no-fix',
-                            'type':'text', 'placeholder': new_password_confirmation_title, 'id':'new_password_confirmation', 
-                            'name':'_new_password_confirmation', 'required':'required'}} %}
-                          {{ form_widget(form.plainPassword.second, opt_new_password_confirmation) }}
-                        </div>
-                      </div>
-                      <div class="form-actions">
-                        <button type="submit" class="btn btn-log pull-right">
-                          Cambiar
-                        </button>
-                      </div>
-                      <!-- Et le reste du formulaire ... :) -->
-                      {{ form_widget(form) }}
-                    </form>
-                  </div>
-              <!-- END RESETTNG PASSWORD FORM -->
-              
-
-
-              {% elseif (route == 'fos_user_registration_register') %}
-
-                <h2>
-                  Registrarse
-                </h2>
-                <hr/>
-
-                <div>
-                  <!-- BEGIN REGISTRATION FORM -->
-                  <form class="register-form" action="{{ path('fos_user_registration_register') }}" method="post" {{ form_enctype(form) }} >
-                      
-                      {% if form_errors(form) %}
-                        <div class="error_message">
-                          <span class="warning_word">
-                            Cuidado!
-                          </span>
-                          <span class="warning_message">
-                            {{ form_errors(form) }}
-                          </span>
-                        </div>
-                        <br/>
-                      {% endif %}
-
-                    <div class="form-group">
-                      {% set username_input = 'Nombre de usuario' %}
-                      {% if form_errors(form.username) %}
-                        <div class="error_message">
-                          <span class="warning_word">
-                            Cuidado!
-                          </span>
-                          <span class="warning_message">
-                            {{ form_errors(form.username) }}
-                          </span>
-                        </div>
-                        <br/>
-                      {% endif %}
-                      {{ form_label(form.username) }}
-                      <div class="input-icon">
-                        {% set opt_username_input = {'attr': {'class': 'form-control placeholder-no-fix',
-                          'type':'text', 'placeholder': username_input, 'id':'username', 
-                          'name':'username', 'required':'required', 'autofocus':''}} %}
-                        {{ form_widget(form.username, opt_username_input) }}
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      {% set email_input = 'E-mail' %}
-                      {% if form_errors(form.email) %}
-                        <div class="error_message">
-                          <span class="warning_word">
-                            Cuidado!
-                          </span>
-                          <span class="warning_message">
-                            {{ form_errors(form.email) }}
-                          </span>
-                        </div>
-                        <br/>
-                      {% endif %}
-                      {{ email_input }}
-                      <div class="input-icon">
-                        {% set opt_email_input = {'attr': {'class': 'form-control placeholder-no-fix',
-                          'type':'text', 'placeholder': email_input, 'id':'email',
-                          'name':'email', 'required':'required'}} %}
-                        {{ form_widget(form.email, opt_email_input) }}
-                      </div>
-                    </div>
-
-                     <div class="form-group">
-                      {% set password_input = 'Contraseña' %}
-                      {% if form_errors(form.plainPassword.first) %}
-                        <div class="error_message">
-                          <span class="warning_word">
-                            Cuidado!
-                          </span>
-                          <span class="warning_message">
-                            {{ form_errors(form.plainPassword.first) }}
-                          </span>
-                        </div>
-                        <br/>
-                      {% endif %}
-                      {{ password_input }}
-                      <div class="input-icon">
-                        {% set opt_password_input = {'attr': {'class': 'form-control placeholder-no-fix',
-                          'type':'password', 'placeholder': password_input, 'id':'password', 'autocomplete':'off',
-                          'name':'password', 'required':'required'}} %}
-                        {{ form_widget(form.plainPassword.first, opt_password_input) }}
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      {% set rePassword_input = 'Contraseña de nuevo' %}
-                      {% if form_errors(form.plainPassword.second) %}
-                        <div class="error_message">
-                          <span class="warning_word">
-                            Cuidado!
-                          </span>
-                          <span class="warning_message">
-                            {{ form_errors(form.plainPassword.second) }}
-                          </span>
-                        </div>
-                        <br/>
-                      {% endif %}
-                      {{ rePassword_input }}
-                      <div class="input-icon">
-                        {% set opt_rePassword_input = {'attr': {'class': 'form-control placeholder-no-fix',
-                          'type':'password', 'placeholder': rePassword_input, 'id':'rpassword', 'autocomplete':'off',
-                          'name':'rpassword', 'required':'required'}} %}
-                        {{ form_widget(form.plainPassword.second, opt_rePassword_input) }}
-                      </div>
-                    </div>
-
-                    <div class="form-group web_conditions_box">
-                      <label for="conditions" class="checkbox">
-                        <div class="checker">
-                          <span>
-                            <input type="checkbox" id="conditions" name="_conditions" value="on" required="required"/>
-                          </span>
-                        </div> 
-                        Soy de acuerdo con
-                        <a href="#">
-                          las condiciónes de uso
-                        </a>
-                        y
-                        <a href="#">
-                          y las policías de vida privada
-                        </a>
-                      </label>
-                    </div>
-                    <div class="form-actions center">
-                      <button type="submit" id="register-submit-btn" class="btn">
-                        Registrar
-                      </button>
-                    </div>
-
-                    <!-- Ce qu'il reste du formulaire ... ;) -->
-                    {{ form_widget(form) }}
-                  </form>
-                  <!-- END REGISTRATION FORM -->
-                </div>
-
-              {% elseif route == 'fos_user_security_login' %}
+              {% if route == 'fos_user_security_login' %}
                 <h2>
                   Connección
                 </h2>
@@ -323,15 +76,6 @@
                       </div>
 
                       <br/><br/>
-                      
-                      <div class="forget-password center">
-                        <a href="{{ path('fos_user_resetting_request') }}">
-                          <strong>
-                            Contraseña olvidada?
-                          </strong>
-                        </a> 
-                      </div>
-
                       <br/><br/>
                       <br/><br/>
 
@@ -339,84 +83,20 @@
                 </div>
                 <!-- END LOGIN FORM -->
 
-              {% elseif route == 'fos_user_registration_check_email' %}
-                <h2>
-                  Averiguar sus emails
-                </h2>
-                <hr/>
-
-                <br/><br/><br/><br/><br/><br/><br/>
-
-                <div class="center">
-                  Bienvenido en nuestro sitio! Por favor, averigue sus emails.
-                  <br/>
-                  <strong>
-                    Deo Volente
-                  </strong>
-                </div>
-
-              {% elseif route == 'fos_user_registration_confirm' %}
-                <h2>
-                  Confirmar su email
-                </h2>
-                <hr/>
-
-                <br/><br/><br/><br/><br/><br/><br/>
-
-                <div class="center">
-                  Por favor, confirme su email.
-                  <br/>
-                  <strong>
-                    Deo Volente
-                  </strong>
-                </div>
-
-              {% elseif route == 'fos_user_resetting_send_email' 
-                      or route == 'fos_user_resetting_check_email' %}
-                <h2>
-                  AVeriguar sus emails
-                </h2>
-                <hr/>
-
-                <br/><br/><br/><br/><br/><br/><br/>
-
-                <div class="center">
-                  Por favor, averigue su email para su nueva contraseña.
-                  <br/>
-                  <strong>
-                    Deo Volente
-                  </strong>
-                </div>
-
-              {% elseif route == 'fos_user_registration_confirmed' %}
-                <h2>
-                  Gracias!
-                </h2>
-                <hr/>
-
-                <br/><br/><br/><br/><br/><br/><br/>
-
-                <div class="center">
-                  Todo esta bien. Gracias por su ayuda.
-                  <strong>
-                    Deo Volente
-                  </strong>
-                  <br/><br/>
-                  <a href="{{ path('dv_main_homepage') }}" class="center btn-log no_style_a">
-                    Atrás
-                  </a>
-                </div>
 
               {% else %}
                 <h2>
-                  Gracias!
+                  Ojo!
                 </h2>
                 <hr/>
 
-                <br/><br/><br/><br/><br/>
+                <br/><br/>
 
                 <div class="center">
-                  Todo esta bien. Gracias por su ayuda.
+                  Conctacte el webmaster. 
+                  <br/>
+                  Gracias.
+                  <br/>
                   <br/>
                   <strong>
                     Deo Volente
@@ -426,10 +106,8 @@
                 <br/><br/>
 
                 <div class="center italic">
-                  Si usted encontra cualquier problema, contacte el 
-                  <br/><br/>
-                  <a href="{{ path('dv_main_contact') }}" class="center btn-log no_style_a">
-                    webmaster
+                  <a href="mailto:p.a.destremau@gmail.com" class="center btn-log no_style_a">
+                    Email webmaster
                   </a>
                 </div>
               {% endif %}
