@@ -8,7 +8,7 @@
     var window_height = window.innerHeight - header_height - header_footer;
     
     // Full page customized
-    $('#page_content').css({'height':window_height+'px'});
-    $('.txt_sobre_img').css({'height':window_height+'px'});
+    $('#page_content').css({'min-height':window_height+'px'});
+    $('.txt_sobre_img').css({'min-height':window_height+'px'});
 
   });

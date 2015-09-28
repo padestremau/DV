@@ -76,15 +76,6 @@
 				    				
 									{% if paginaPedida %}
 									<div class="row">
-										<div class="inline_div">
-											<h4>
-												{% if paginaPedida.nombre|length > 0 %}
-													{{ paginaPedida.nombre|raw }}
-												{% else %}
-													(Titre vide)
-												{% endif %}
-											</h4>
-										</div>
 										<div class="inline_div float-right date_article_lg">
 											{% if paginaPedida.ultimaModificacion|length > 0 %}
 												el {{ paginaPedida.ultimaModificacion|date('d M Y') }} a las {{ paginaPedida.ultimaModificacion|date('H:i') }}
